@@ -529,6 +529,36 @@ textarea{resize:vertical}
         </div>
       </div>
 
+
+      <!-- Documentos de soporte -->
+      <div class="field-group">
+        <div class="section-label">Documentos de soporte</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Adjunta evidencias, análisis o materiales de apoyo · Máx. 35 MB por archivo</p>
+        <div class="upload-zone" id="upload-zone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.gif,.zip,.mp4" onchange="handleFiles(this.files)">
+          <div class="upload-icon">📎</div>
+          <div class="upload-title">Arrastra archivos aquí o haz clic para seleccionar</div>
+          <div class="upload-sub">PDF, Word, Excel, PowerPoint, imágenes · Máx. 35 MB por archivo</div>
+        </div>
+        <div class="upload-list" id="upload-list"></div>
+      </div>
+
+      <!-- Confirmación -->
+      <div class="field-group">
+        <div class="section-label">Confirmación</div>
+        <div class="grid-2">
+          <div>
+            <label class="field-label">Nombre del PO <span class="field-required">*</span></label>
+            <input class="form-input" id="field-firma_po" type="text" name="firma_po" placeholder="Nombre completo" required>
+            <span class="field-error-msg">⚠ Ingresa el nombre completo del PO</span>
+          </div>
+          <div>
+            <label class="field-label">Fecha de entrega</label>
+            <input class="form-input" type="date" name="fecha" id="fecha-input">
+          </div>
+        </div>
+      </div>
+
       <button type="submit" class="btn-submit" id="btn-submit">🦈 &nbsp; ENVIAR INICIATIVA AL PANEL</button>
     </form>
   </div>
