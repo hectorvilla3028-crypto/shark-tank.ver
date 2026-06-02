@@ -315,6 +315,32 @@ textarea{resize:vertical}
 .btn-sm.danger:hover{background:var(--danger);color:var(--white);border-color:var(--danger)}
 .btn-sm:disabled{opacity:.4;cursor:not-allowed}
 
+
+/* ══ VIEW TOGGLE & LIST VIEW ═════════════════════ */
+.view-toggle{display:flex;align-items:center;gap:6px;background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:4px}
+.view-btn{padding:6px 12px;border-radius:6px;font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--muted);transition:all .15s;border:none;background:none;cursor:pointer;display:flex;align-items:center;gap:6px}
+.view-btn.active{background:var(--b900);color:var(--white)}
+.view-btn svg{width:14px;height:14px;flex-shrink:0}
+.btn-export{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;background:var(--b800);color:var(--white);font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;transition:background .15s}
+.btn-export:hover{background:var(--b600)}
+.btn-export svg{width:14px;height:14px}
+/* List table */
+.list-table-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;overflow-x:auto}
+.list-table{width:100%;border-collapse:collapse;font-size:12px;min-width:800px}
+.list-table thead tr{background:var(--b900)}
+.list-table thead th{padding:12px 16px;text-align:left;font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:500;white-space:nowrap;border-right:1px solid rgba(255,255,255,.08)}
+.list-table thead th:last-child{border-right:none}
+.list-table tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:background .12s}
+.list-table tbody tr:hover{background:var(--b50)}
+.list-table tbody tr:last-child{border-bottom:none}
+.list-table td{padding:11px 16px;color:var(--ink);vertical-align:middle;border-right:1px solid var(--line)}
+.list-table td:last-child{border-right:none}
+.list-folio{font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--b700);background:var(--b100);padding:3px 8px;border-radius:100px;white-space:nowrap}
+.list-kpi-badge{font-family:var(--ff-mono);font-size:9px;padding:2px 8px;border-radius:100px;background:var(--b100);color:var(--b700);white-space:nowrap}
+.list-kpi-val{font-family:var(--ff-display);font-size:16px;color:var(--accent);letter-spacing:.04em}
+.list-docs{font-family:var(--ff-mono);font-size:9px;color:var(--b600)}
+.list-date{font-family:var(--ff-mono);font-size:10px;color:var(--muted)}
+
 /* ══ TOAST ══════════════════════════════════════ */
 #toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--success);color:var(--white);padding:14px 28px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
@@ -431,8 +457,16 @@ textarea{resize:vertical}
         <div class="grid-3">
           <div><label class="field-label">Product Owner <span class="field-required">*</span></label><input class="form-input" id="field-po" type="text" name="po" placeholder="Tu nombre" required>
         <span class="field-error-msg">⚠ Ingresa el nombre del Product Owner</span></div>
-          <div><label class="field-label">Región / Plaza <span class="field-required">*</span></label><input class="form-input" id="field-zona" type="text" name="zona" placeholder="Ej. Xalapa Norte" required>
-        <span class="field-error-msg">⚠ Indica la Región / Plaza</span></div>
+          <div><label class="field-label">Región / Plaza <span class="field-required">*</span></label><select class="form-input" id="field-zona" name="zona" required style="color:var(--ink);appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath d=%22M1 1l5 5 5-5%22 stroke=%22%235A7FA8%22 stroke-width=%221.5%22 fill=%22none%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer">
+              <option value="" disabled selected>Selecciona una opción...</option>
+              <option value="Región">Región</option>
+              <option value="Plaza Boca del Río">Plaza Boca del Río</option>
+              <option value="Plaza Córdoba">Plaza Córdoba</option>
+              <option value="Plaza Coatzacoalcos">Plaza Coatzacoalcos</option>
+              <option value="Plaza Poza Rica">Plaza Poza Rica</option>
+              <option value="Plaza Xalapa">Plaza Xalapa</option>
+            </select>
+            <span class="field-error-msg">⚠ Selecciona la Región / Plaza</span></div>
           <div><label class="field-label">Duración estimada</label><input class="form-input" type="text" name="duracion" placeholder="Ej. 8 semanas"></div>
         </div>
       </div>
@@ -494,36 +528,7 @@ textarea{resize:vertical}
           </div>
         </div>
       </div>
-      <div class="field-group">
-        <div class="section-label">Alineación con Framework Operaciones 2026</div>
-        <div class="pilares-wrap">
-          <button type="button" class="pilar-btn" data-p="Expansión rentable" onclick="togglePilar(this)">Expansión rentable</button>
-          <button type="button" class="pilar-btn" data-p="Transacciones digitales" onclick="togglePilar(this)">Transacciones digitales</button>
-          <button type="button" class="pilar-btn" data-p="Nuestra Gente" onclick="togglePilar(this)">Nuestra Gente</button>
-          <button type="button" class="pilar-btn" data-p="Propuesta de valor" onclick="togglePilar(this)">Propuesta de valor</button>
-          <button type="button" class="pilar-btn" data-p="Servicio a tiendas" onclick="togglePilar(this)">Servicio a tiendas</button>
-          <button type="button" class="pilar-btn" data-p="Fidelización Spin" onclick="togglePilar(this)">Fidelización Spin</button>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="section-label">Documentos de soporte</div>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Adjunta evidencias, análisis o materiales de apoyo · Máx. 1 MB por archivo (se almacenan en Firestore)</p>
-        <div class="upload-zone" id="upload-zone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
-          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.gif,.zip" onchange="handleFiles(this.files)">
-          <div class="upload-icon">📎</div>
-          <div class="upload-title">Arrastra archivos aquí o haz clic para seleccionar</div>
-          <div class="upload-sub">PDF, Word, Excel, PowerPoint, imágenes · Máx. 1 MB por archivo</div>
-        </div>
-        <div class="upload-list" id="upload-list"></div>
-      </div>
-      <div class="field-group">
-        <div class="section-label">Confirmación</div>
-        <div class="grid-2">
-          <div><label class="field-label">Nombre del PO <span class="field-required">*</span></label><input class="form-input" id="field-firma_po" type="text" name="firma_po" placeholder="Nombre completo" required>
-        <span class="field-error-msg">⚠ Ingresa el nombre completo del PO</span></div>
-          <div><label class="field-label">Fecha de entrega</label><input class="form-input" type="date" name="fecha" id="fecha-input"></div>
-        </div>
-      </div>
+
       <button type="submit" class="btn-submit" id="btn-submit">🦈 &nbsp; ENVIAR INICIATIVA AL PANEL</button>
     </form>
   </div>
@@ -535,7 +540,23 @@ textarea{resize:vertical}
     <div class="admin-section-head">
       <div>
         <div class="admin-section-title">Iniciativas registradas</div>
-        <div class="admin-section-sub">Datos en tiempo real · Haz clic en una tarjeta para ver el detalle completo y descargar documentos</div>
+        <div class="admin-section-sub">Datos en tiempo real · Haz clic en un registro para ver el detalle y descargar documentos</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <div class="view-toggle">
+          <button class="view-btn active" id="btn-view-cards" onclick="setView('cards')" title="Vista tarjetas">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+            Tarjetas
+          </button>
+          <button class="view-btn" id="btn-view-list" onclick="setView('list')" title="Vista lista">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="4" x2="15" y2="4"/><line x1="1" y1="8" x2="15" y2="8"/><line x1="1" y1="12" x2="15" y2="12"/></svg>
+            Lista
+          </button>
+        </div>
+        <button class="btn-export hidden" id="btn-export" onclick="exportExcel()">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 1h7l3 3v11H3V1z"/><path d="M10 1v3h3"/><path d="M5 8l2 2 4-4"/></svg>
+          Exportar Excel
+        </button>
       </div>
     </div>
     <div class="filters-bar">
@@ -562,6 +583,27 @@ textarea{resize:vertical}
         <div class="skel" style="height:20px;width:90%;margin-bottom:8px"></div>
         <div class="skel" style="height:10px;width:45%"></div>
       </div>
+    </div>
+
+    <!-- List view -->
+    <div class="list-table-wrap hidden" id="list-wrap">
+      <table class="list-table" id="list-table">
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Iniciativa</th>
+            <th>Product Owner</th>
+            <th>Región / Plaza</th>
+            <th>KPI</th>
+            <th>Meta</th>
+            <th>Tiendas</th>
+            <th>Inversión</th>
+            <th>Docs</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="list-tbody"></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -788,7 +830,7 @@ window.handleDrop = function(e){
 
 window.handleFiles = function(files){
   Array.from(files).forEach(f=>{
-    if(f.size > 1*1024*1024){ showToast('⚠️  '+f.name+' supera 1 MB — límite de Firestore','#B91C1C'); return; }
+    if(f.size > 35*1024*1024){ showToast('⚠️  '+f.name+' supera 35 MB','#B91C1C'); return; }
     if(uploadedFiles.find(x=>x.name===f.name)) return;
     const reader = new FileReader();
     reader.onload = ev => {
@@ -928,6 +970,7 @@ window.renderCards = function(){
   if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
   if(fz) ils=ils.filter(i=>i.zona===fz);
   document.getElementById('filters-count').textContent=ils.length===1?'1 iniciativa':`${ils.length} iniciativas`;
+  if(currentView==='list'){ renderList(); return; }
   const grid=document.getElementById('cards-grid');
   if(!ils.length){
     grid.innerHTML=`<div class="empty-state"><div class="empty-icon">🦈</div><div class="empty-title">Sin iniciativas</div><div class="empty-sub">No hay registros que coincidan con los filtros</div></div>`;
@@ -1037,6 +1080,85 @@ window.deleteFromModal = async function(){
   } finally {
     btn.disabled=false; btn.textContent='🗑 Eliminar';
   }
+};
+
+/* ── View toggle ── */
+let currentView = 'cards';
+window.setView = function(view){
+  currentView = view;
+  document.getElementById('btn-view-cards').classList.toggle('active', view==='cards');
+  document.getElementById('btn-view-list').classList.toggle('active', view==='list');
+  document.getElementById('cards-grid').classList.toggle('hidden', view==='list');
+  document.getElementById('list-wrap').classList.toggle('hidden', view==='cards');
+  document.getElementById('btn-export').classList.toggle('hidden', view==='cards');
+  if(view==='list') renderList();
+};
+
+/* ── Render list ── */
+window.renderList = function(){
+  const q=(document.getElementById('filter-search').value||'').toLowerCase();
+  const fk=document.getElementById('filter-kpi').value;
+  const fz=document.getElementById('filter-zona').value;
+  let ils=ilsCache;
+  if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
+  if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
+  if(fz) ils=ils.filter(i=>i.zona===fz);
+  const tbody = document.getElementById('list-tbody');
+  if(!ils.length){
+    tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--muted)">Sin iniciativas que coincidan con los filtros</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = ils.map(il=>`
+    <tr onclick="openModal('${il.id}')">
+      <td>${il.folio?`<span class="list-folio">${esc(il.folio)}</span>`:'—'}</td>
+      <td style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(il.nombre)}</td>
+      <td>${esc(il.po||'—')}</td>
+      <td>${esc(il.zona||'—')}</td>
+      <td>${il.kpi_tipo?`<span class="list-kpi-badge">${esc(il.kpi_tipo)}</span>`:'—'}</td>
+      <td><span class="list-kpi-val">${esc(il.kpi_principal||'—')}</span></td>
+      <td style="text-align:center">${esc(il.kpi_tiendas||'—')}</td>
+      <td>${esc(il.inversion||'—')}</td>
+      <td class="list-docs">${(il.docs||[]).length>0?`📎 ${(il.docs||[]).length}`:'—'}</td>
+      <td class="list-date">${esc(il.fecha||'—')}</td>
+    </tr>`).join('');
+};
+
+/* ── Export Excel (CSV → xlsx via SheetJS) ── */
+window.exportExcel = function(){
+  const q=(document.getElementById('filter-search').value||'').toLowerCase();
+  const fk=document.getElementById('filter-kpi').value;
+  const fz=document.getElementById('filter-zona').value;
+  let ils=ilsCache;
+  if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
+  if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
+  if(fz) ils=ils.filter(i=>i.zona===fz);
+
+  const headers = ['Folio','Iniciativa','Product Owner','Región/Plaza','KPI Tipo','Meta KPI','Tiendas Piloto','Plazo','Meta Financiera','Inversión','Objetivo','Problema','Solución','Alcance','Actividad 1','Actividad 2','Actividad 3','Beneficio 1','Beneficio 2','Beneficio 3','Fecha','Registrado','Documentos'];
+
+  const rows = ils.map(il=>[
+    il.folio||'', il.nombre||'', il.po||'', il.zona||'',
+    il.kpi_tipo||'', il.kpi_principal||'', il.kpi_tiendas||'',
+    il.kpi_plazo||'', il.kpi_meta||'', il.inversion||'',
+    il.objetivo||'', il.problema||'', il.solucion||'', il.alcance||'',
+    il.act1||'', il.act2||'', il.act3||'',
+    il.ben1||'', il.ben2||'', il.ben3||'',
+    il.fecha||'', il.registrado||'',
+    (il.docs||[]).map(d=>d.name).join(', ')
+  ]);
+
+  // Build CSV
+  const csvContent = [headers, ...rows]
+    .map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(','))
+    .join('\n');
+
+  const blob = new Blob(['\uFEFF'+csvContent], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `SharkTank_VER_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('✅  Exportado correctamente');
 };
 
 /* ── Helpers ── */
