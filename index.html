@@ -341,6 +341,105 @@ textarea{resize:vertical}
 .list-docs{font-family:var(--ff-mono);font-size:9px;color:var(--b600)}
 .list-date{font-family:var(--ff-mono);font-size:10px;color:var(--muted)}
 
+
+/* ══ COMPLEJIDAD SCALE ═══════════════════════════ */
+.cplx-btn{
+  width:38px;height:38px;border-radius:8px;font-size:13px;font-weight:700;
+  border:1.5px solid var(--line);color:var(--mid);background:var(--white);
+  transition:all .15s;cursor:pointer;flex-shrink:0;
+}
+.cplx-btn:hover{border-color:var(--accent);color:var(--accent)}
+.cplx-btn.on{color:var(--white);border-color:transparent}
+.cplx-btn[data-v="1"].on,.cplx-btn[data-v="2"].on,.cplx-btn[data-v="3"].on{background:#16A34A}
+.cplx-btn[data-v="4"].on,.cplx-btn[data-v="5"].on{background:#65A30D}
+.cplx-btn[data-v="6"].on,.cplx-btn[data-v="7"].on{background:#D97706}
+.cplx-btn[data-v="8"].on,.cplx-btn[data-v="9"].on{background:#DC2626}
+.cplx-btn[data-v="10"].on{background:#7C3AED}
+
+/* ══ ÁREAS WRAP ══════════════════════════════════ */
+.areas-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.area-btn{
+  padding:5px 12px;border-radius:100px;font-size:11px;font-weight:600;
+  border:1.5px solid var(--line);color:var(--mid);background:var(--white);
+  transition:all .15s;cursor:pointer;
+}
+.area-btn:hover{border-color:var(--accent);color:var(--accent)}
+.area-btn.on{background:var(--accent);border-color:var(--accent);color:var(--white)}
+
+/* ══ EVALUATION PANEL ════════════════════════════ */
+#eval-overlay{position:fixed;inset:0;background:rgba(13,27,42,.65);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px}
+.eval-box{
+  background:var(--white);border-radius:14px;
+  width:100%;max-width:750px;max-height:92vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+  animation:modalIn .2s ease;
+}
+.eval-header{background:var(--b900);padding:22px 28px;border-radius:14px 14px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:2}
+.eval-header-title{font-family:var(--ff-display);font-size:22px;letter-spacing:.04em;color:var(--white)}
+.eval-header-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:4px}
+.eval-close{color:rgba(255,255,255,.4);font-size:20px;padding:4px;border-radius:4px;transition:color .15s}
+.eval-close:hover{color:var(--white)}
+.eval-accent{height:3px;background:linear-gradient(90deg,var(--b800),var(--b500),var(--b300))}
+.eval-body{padding:24px 28px}
+.eval-section{margin-bottom:22px}
+.eval-section-title{font-family:var(--ff-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+
+/* Score sliders */
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:10px 14px;background:var(--b50);border-radius:8px;border:1px solid var(--line)}
+.score-label{flex:1;font-size:12px;font-weight:600;color:var(--ink)}
+.score-weight{font-family:var(--ff-mono);font-size:10px;color:var(--muted);flex-shrink:0;width:28px;text-align:right}
+.score-input{width:90px;flex-shrink:0}
+.score-input input[type=range]{width:100%;accent-color:var(--accent)}
+.score-num{font-family:var(--ff-display);font-size:20px;color:var(--accent);width:24px;text-align:center;flex-shrink:0}
+.score-total-box{background:var(--b900);border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.score-total-label{font-size:13px;color:rgba(255,255,255,.6);font-weight:600}
+.score-total-val{font-family:var(--ff-display);font-size:36px;letter-spacing:.04em;color:var(--b300)}
+.decision-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.decision-btn{
+  padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--line);color:var(--mid);background:var(--white);
+  transition:all .15s;cursor:pointer;
+}
+.decision-btn:hover{transform:translateY(-1px)}
+.decision-btn.on-approved{background:#16A34A;border-color:#16A34A;color:var(--white)}
+.decision-btn.on-conditional{background:#D97706;border-color:#D97706;color:var(--white)}
+.decision-btn.on-rejected{background:#DC2626;border-color:#DC2626;color:var(--white)}
+.eval-textarea{width:100%;font-family:var(--ff-body);font-size:13px;color:var(--ink);background:var(--b50);border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;resize:vertical;min-height:90px;outline:none;transition:border-color .15s;line-height:1.65}
+.eval-textarea:focus{border-color:var(--accent)}
+.eval-footer{padding:14px 28px 22px;display:flex;justify-content:flex-end;gap:10px}
+.btn-eval-pdf{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;background:var(--b800);color:var(--white);font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;border:none;cursor:pointer;transition:background .15s}
+.btn-eval-pdf:hover{background:var(--b600)}
+
+
+/* ══ EVAL STATUS BADGE ═══════════════════════════ */
+.eval-status-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--ff-mono);font-size:9px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 9px;border-radius:100px;flex-shrink:0;
+}
+.eval-status-badge.evaluated   { background:#DCFCE7; color:#14532D; }
+.eval-status-badge.pending     { background:#FEF9C3; color:#713F12; }
+.eval-score-mini{
+  font-family:var(--ff-display);font-size:15px;letter-spacing:.04em;
+  margin-left:6px;
+}
+/* Eval info strip at bottom of card */
+.il-card-eval{
+  padding:8px 20px;border-top:1px solid var(--line);
+  background:var(--white);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.eval-decision-pill{
+  font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;
+  font-family:var(--ff-mono);letter-spacing:.04em;
+}
+.eval-decision-pill.approved    { background:#DCFCE7;color:#14532D }
+.eval-decision-pill.conditional { background:#FEF3C7;color:#92400E }
+.eval-decision-pill.rejected    { background:#FEE2E2;color:#7F1D1D }
+/* List table eval columns */
+.list-eval-score{ font-family:var(--ff-display);font-size:15px;color:var(--accent) }
+
 /* ══ TOAST ══════════════════════════════════════ */
 #toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--success);color:var(--white);padding:14px 28px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
@@ -454,8 +553,10 @@ textarea{resize:vertical}
       </div>
       <div class="field-group">
         <div class="section-label">Datos del proyecto</div>
-        <div class="grid-3">
-          <div><label class="field-label">Product Owner <span class="field-required">*</span></label><input class="form-input" id="field-po" type="text" name="po" placeholder="Tu nombre" required>
+
+        <!-- Row 1: PO, Región/Plaza, Duración -->
+        <div class="grid-3" style="margin-bottom:16px">
+          <div><label class="field-label">Product Owner (líder de iniciativa) <span class="field-required">*</span></label><input class="form-input" id="field-po" type="text" name="po" placeholder="Tu nombre" required>
         <span class="field-error-msg">⚠ Ingresa el nombre del Product Owner</span></div>
           <div><label class="field-label">Región / Plaza <span class="field-required">*</span></label><select class="form-input" id="field-zona" name="zona" required style="color:var(--ink);appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath d=%22M1 1l5 5 5-5%22 stroke=%22%235A7FA8%22 stroke-width=%221.5%22 fill=%22none%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer">
               <option value="" disabled selected>Selecciona una opción...</option>
@@ -469,7 +570,86 @@ textarea{resize:vertical}
             <span class="field-error-msg">⚠ Selecciona la Región / Plaza</span></div>
           <div><label class="field-label">Duración estimada</label><input class="form-input" type="text" name="duracion" placeholder="Ej. 8 semanas"></div>
         </div>
+
+        <!-- Row 2: Complejidad + Áreas (native select dropdowns) -->
+        <div class="grid-2">
+          <!-- Complejidad: select dropdown -->
+          <div>
+            <label class="field-label">Complejidad de implementación <span class="field-required">*</span></label>
+            <select class="form-input" name="complejidad" id="complejidad-val" required
+              style="color:var(--ink);appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22%3E%3Cpath d=%22M1 1l5 5 5-5%22 stroke=%22%235A7FA8%22 stroke-width=%221.5%22 fill=%22none%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer">
+              <option value="" disabled selected>Selecciona un nivel...</option>
+              <option value="1">1 · Muy simple — sin dependencias externas</option>
+              <option value="2">2 · Simple</option>
+              <option value="3">3 · Simple — pocas áreas involucradas</option>
+              <option value="4">4 · Moderada baja</option>
+              <option value="5">5 · Moderada — coordinación entre áreas</option>
+              <option value="6">6 · Moderada alta</option>
+              <option value="7">7 · Alta — múltiples dependencias</option>
+              <option value="8">8 · Alta — seguimiento cercano requerido</option>
+              <option value="9">9 · Muy alta — riesgo operativo elevado</option>
+              <option value="10">10 · Muy alta — ejecución crítica</option>
+            </select>
+          </div>
+          <!-- Áreas involucradas: select múltiple -->
+          <div>
+            <label class="field-label">Áreas involucradas <span class="field-required">*</span></label>
+            <p style="font-size:11px;color:var(--muted);margin-bottom:6px">Mantén Ctrl (o Cmd en Mac) para seleccionar varias</p>
+            <select class="form-input" id="areas-select" name="areas_select" multiple
+              style="height:168px;padding:6px 10px;font-size:13px;cursor:pointer;background-image:none">
+              <option value="Comercial">Comercial</option>
+              <option value="Recursos Humanos">Recursos Humanos</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Aperturas">Aperturas</option>
+              <option value="Conservación">Conservación</option>
+              <option value="Operaciones">Operaciones</option>
+              <option value="TI">TI</option>
+              <option value="Centro de Reclutamiento">Centro de Reclutamiento</option>
+              <option value="Centro de AP">Centro de AP</option>
+              <option value="PLP">PLP</option>
+              <option value="i78">i78</option>
+              <option value="Centro de Entrenamiento">Centro de Entrenamiento</option>
+            </select>
+          </div>
+        </div>
       </div>
+      <div class="field-group">
+        <div class="section-label">Diagnóstico y propuesta</div>
+        <div class="grid-3" style="margin-bottom:16px">
+          <div>
+            <label class="field-label">Situación actual <span class="field-required">*</span></label>
+            <textarea class="form-input form-textarea" id="field-problema" name="problema" placeholder="Describe el contexto y la situación que detectaste en tu plaza. Incluye datos si los tienes..." required></textarea>
+            <span class="field-error-msg">⚠ Describe la situación actual</span>
+          </div>
+          <div>
+            <label class="field-label">Impacto generado <span class="field-required">*</span></label>
+            <textarea class="form-input form-textarea" id="field-impacto" name="impacto" placeholder="¿Qué consecuencia tiene esa situación en venta, tráfico o experiencia del cliente?..." required></textarea>
+            <span class="field-error-msg">⚠ Describe el impacto generado</span>
+          </div>
+          <div>
+            <label class="field-label">Solución propuesta <span class="field-required">*</span></label>
+            <textarea class="form-input form-textarea" id="field-solucion" name="solucion" placeholder="¿Qué vas a hacer? Describe la mecánica concreta de la iniciativa..." required></textarea>
+            <span class="field-error-msg">⚠ Describe la solución propuesta</span>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <label class="field-label">Objetivo <span class="field-required">*</span></label>
+            <textarea class="form-input form-textarea" id="field-objetivo" name="objetivo" placeholder="¿Qué quieres lograr? Usa verbos de acción: incrementar, reducir, lograr..." required></textarea>
+            <span class="field-error-msg">⚠ Define el objetivo de la iniciativa</span>
+          </div>
+          <div>
+            <label class="field-label">Alcance <span class="field-required">*</span></label>
+            <textarea class="form-input form-textarea" id="field-alcance" name="alcance" placeholder="¿Cuántas tiendas? ¿Qué zonas? ¿Qué categorías o servicios están incluidos?" required></textarea>
+            <span class="field-error-msg">⚠ Define el alcance de la iniciativa</span>
+          </div>
+          <div>
+            <label class="field-label">Riesgos identificados</label>
+            <textarea class="form-input form-textarea" name="riesgos" placeholder="¿Qué obstáculos o riesgos podrían afectar la implementación? ¿Cómo los mitigarías?..."></textarea>
+          </div>
+        </div>
+      </div>
+
       <div class="field-group">
         <div class="section-label">Indicador clave de la iniciativa</div>
         <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Selecciona el KPI principal que impactará tu iniciativa</p>
@@ -483,45 +663,44 @@ textarea{resize:vertical}
         </div>
       </div>
       <div class="field-group">
-        <div class="section-label">Métricas e indicadores</div>
-        <div class="grid-4">
+        <div class="section-label">Indicadores e impacto</div>
+
+        <!-- Row 1: KPI metrics (3 boxes) -->
+        <div class="grid-3" style="margin-bottom:16px">
           <div class="kpi-box"><label class="field-label">Meta del KPI <span class="field-required">*</span></label><input class="kpi-input-big" type="text" id="field-kpi_principal" name="kpi_principal" placeholder="+X%" required>
         <span class="field-error-msg">⚠ Ingresa la meta del KPI principal</span><div class="kpi-sub" id="kpi-sub-label">Selecciona KPI arriba</div></div>
           <div class="kpi-box"><label class="field-label">Tiendas piloto</label><input class="kpi-input-big" type="text" name="kpi_tiendas" placeholder="00"><div class="kpi-sub">Unidades en prueba</div></div>
           <div class="kpi-box"><label class="field-label">Plazo de prueba</label><input class="kpi-input-big" type="text" name="kpi_plazo" placeholder="00d"><div class="kpi-sub">Días / semanas</div></div>
-          <div class="kpi-box"><label class="field-label">Meta financiera</label><input class="kpi-input-big" type="text" name="kpi_meta" placeholder="$—"><div class="kpi-sub">Ticket / transacción</div></div>
         </div>
-      </div>
-      <div class="field-group">
-        <div class="section-label">Problema y solución</div>
+
+        <!-- Row 2: Situación / Resultado / Impacto financiero (3 boxes) -->
+        <div class="grid-3" style="margin-bottom:16px">
+          <div class="kpi-box">
+            <label class="field-label">Situación / Indicador actual</label>
+            <input class="kpi-input-big" type="text" name="inv_situacion" placeholder="Ej. $68" style="font-size:22px">
+            <div class="kpi-sub">Valor de referencia hoy</div>
+          </div>
+          <div class="kpi-box">
+            <label class="field-label">Resultado esperado</label>
+            <input class="kpi-input-big" type="text" name="inv_resultado" placeholder="Ej. $75" style="font-size:22px">
+            <div class="kpi-sub">Valor proyectado al cierre</div>
+          </div>
+          <div class="kpi-box">
+            <label class="field-label">Impacto financiero adicional</label>
+            <input class="kpi-input-big" type="text" name="inv_impacto" placeholder="$0.00" style="font-size:22px">
+            <div class="kpi-sub">Ingreso incremental estimado</div>
+          </div>
+        </div>
+
+        <!-- Row 3: Inversión estimada + Beneficios esperados -->
         <div class="grid-2">
-          <div><label class="field-label">Problema que resuelve <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-problema" name="problema" placeholder="¿Qué situación detectaste en tu plaza? Sé específico..." required></textarea>
-            <span class="field-error-msg">⚠ Describe el problema que resuelve</span></div>
-          <div><label class="field-label">Solución propuesta <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-solucion" name="solucion" placeholder="¿Cómo resuelves el problema? Simple y accionable..." required></textarea>
-            <span class="field-error-msg">⚠ Describe la solución propuesta</span></div>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="grid-2">
-          <div><label class="field-label">Objetivo <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-objetivo" name="objetivo" placeholder="¿Qué quieres lograr? Incrementar, reducir, lograr..." required></textarea>
-            <span class="field-error-msg">⚠ Define el objetivo de la iniciativa</span></div>
-          <div><label class="field-label">Alcance <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-alcance" name="alcance" placeholder="¿Cuántas tiendas? ¿Qué zonas? ¿Qué categorías?" required></textarea>
-            <span class="field-error-msg">⚠ Define el alcance de la iniciativa</span></div>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="section-label">Actividades clave</div>
-        <div class="act-grid">
-          <div class="act-card"><div class="act-num">1</div><label class="field-label">Actividad 1</label><textarea class="form-input form-textarea" name="act1" placeholder="Primera actividad o hito crítico..."></textarea></div>
-          <div class="act-card"><div class="act-num">2</div><label class="field-label">Actividad 2</label><textarea class="form-input form-textarea" name="act2" placeholder="Segunda actividad o hito crítico..."></textarea></div>
-          <div class="act-card"><div class="act-num">3</div><label class="field-label">Actividad 3</label><textarea class="form-input form-textarea" name="act3" placeholder="Tercera actividad o hito crítico..."></textarea></div>
-        </div>
-      </div>
-      <div class="field-group">
-        <div class="section-label">Inversión y beneficios</div>
-        <div class="grid-2">
-          <div><label class="field-label">Inversión estimada (MXN)</label><input class="form-input" type="text" name="inversion" placeholder="$0.00"><p style="font-size:11px;color:var(--muted);margin-top:5px">Costo total del piloto</p></div>
-          <div><label class="field-label">Beneficios esperados</label>
+          <div>
+            <label class="field-label">Inversión estimada (MXN)</label>
+            <input class="form-input" type="text" name="inversion" placeholder="$0.00">
+            <p style="font-size:11px;color:var(--muted);margin-top:5px">Costo total del piloto</p>
+          </div>
+          <div>
+            <label class="field-label">Beneficios esperados</label>
             <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben1" placeholder="Beneficio esperado 1"></div>
             <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben2" placeholder="Beneficio esperado 2"></div>
             <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben3" placeholder="Beneficio esperado 3"></div>
@@ -599,6 +778,11 @@ textarea{resize:vertical}
       <select class="filter-select" id="filter-zona" onchange="renderCards()">
         <option value="">Todas las zonas</option>
       </select>
+      <select class="filter-select" id="filter-eval" onchange="renderCards()">
+        <option value="">Todos los estados</option>
+        <option value="evaluated">✅ Evaluadas</option>
+        <option value="pending">⏳ Pendientes</option>
+      </select>
       <span class="filters-count" id="filters-count"></span>
     </div>
     <div class="cards-grid" id="cards-grid">
@@ -628,6 +812,9 @@ textarea{resize:vertical}
             <th>Meta</th>
             <th>Tiendas</th>
             <th>Inversión</th>
+            <th>Estado eval.</th>
+            <th>Score</th>
+            <th>Decisión</th>
             <th>Docs</th>
             <th>Fecha</th>
           </tr>
@@ -657,6 +844,97 @@ textarea{resize:vertical}
   </div>
 </div>
 
+
+<!-- ══ EVALUATION PANEL ══════════════════════════ -->
+<div id="eval-overlay" class="hidden" onclick="closeEval(event)">
+  <div class="eval-box" id="eval-box">
+    <div class="eval-header">
+      <div>
+        <div class="eval-header-title" id="eval-title">Evaluación de Iniciativa</div>
+        <div class="eval-header-sub" id="eval-sub"></div>
+      </div>
+      <button class="eval-close" onclick="closeEval()">✕</button>
+    </div>
+    <div class="eval-accent"></div>
+    <div class="eval-body">
+
+      <!-- Score criteria -->
+      <div class="eval-section">
+        <div class="eval-section-title">Criterios de evaluación · Califica del 0 al 10</div>
+        <div id="score-rows">
+          <div class="score-row">
+            <div class="score-label">Impacto en venta / tráfico</div>
+            <div class="score-weight">30%</div>
+            <div class="score-input"><input type="range" min="0" max="10" value="5" step="1" oninput="updateScore(this,0)" id="sc0"></div>
+            <div class="score-num" id="sn0">5</div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Claridad del objetivo y alcance</div>
+            <div class="score-weight">20%</div>
+            <div class="score-input"><input type="range" min="0" max="10" value="5" step="1" oninput="updateScore(this,1)" id="sc1"></div>
+            <div class="score-num" id="sn1">5</div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Viabilidad del plan de trabajo</div>
+            <div class="score-weight">20%</div>
+            <div class="score-input"><input type="range" min="0" max="10" value="5" step="1" oninput="updateScore(this,2)" id="sc2"></div>
+            <div class="score-num" id="sn2">5</div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Potencial de escalabilidad</div>
+            <div class="score-weight">20%</div>
+            <div class="score-input"><input type="range" min="0" max="10" value="5" step="1" oninput="updateScore(this,3)" id="sc3"></div>
+            <div class="score-num" id="sn3">5</div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Alineación con prioridades nacionales</div>
+            <div class="score-weight">10%</div>
+            <div class="score-input"><input type="range" min="0" max="10" value="5" step="1" oninput="updateScore(this,4)" id="sc4"></div>
+            <div class="score-num" id="sn4">5</div>
+          </div>
+        </div>
+        <!-- Total score -->
+        <div class="score-total-box">
+          <div class="score-total-label">Score ponderado (0–100)</div>
+          <div class="score-total-val" id="score-total">50.0</div>
+        </div>
+      </div>
+
+      <!-- Decision -->
+      <div class="eval-section">
+        <div class="eval-section-title">Decisión del panel</div>
+        <div class="decision-row">
+          <button type="button" class="decision-btn" id="dec-approved" onclick="setDecision('Aprobada')">✅ Aprobada</button>
+          <button type="button" class="decision-btn" id="dec-conditional" onclick="setDecision('Condicional')">⏳ Condicional</button>
+          <button type="button" class="decision-btn" id="dec-rejected" onclick="setDecision('No aprobada')">❌ No aprobada</button>
+        </div>
+      </div>
+
+      <!-- Comentarios -->
+      <div class="eval-section">
+        <div class="eval-section-title">Comentarios y retroalimentación para el PO</div>
+        <textarea class="eval-textarea" id="eval-comentarios" placeholder="Escribe aquí la retroalimentación para el Product Owner. Sé específico: qué está bien, qué debe mejorar y cuáles son los siguientes pasos recomendados..."></textarea>
+      </div>
+
+      <!-- Fortalezas / Oportunidades -->
+      <div class="eval-section">
+        <div class="eval-section-title">Fortalezas identificadas</div>
+        <textarea class="eval-textarea" id="eval-fortalezas" placeholder="¿Qué aspectos de la iniciativa destacan positivamente?..." style="min-height:70px"></textarea>
+      </div>
+      <div class="eval-section">
+        <div class="eval-section-title">Áreas de oportunidad</div>
+        <textarea class="eval-textarea" id="eval-oportunidades" placeholder="¿Qué debe reforzar o clarificar el PO para que la iniciativa sea aprobada?..." style="min-height:70px"></textarea>
+      </div>
+
+    </div>
+    <div class="eval-footer">
+      <button class="btn-sm" onclick="closeEval()">Cancelar</button>
+      <button class="btn-sm" style="border-color:var(--b400);color:var(--b600);font-weight:700" onclick="saveEval()">💾 Guardar evaluación</button>
+      <button class="btn-eval-pdf" onclick="exportEvalPDF()">📄 Exportar PDF</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ MODAL ══════════════════════════════════ -->
 <div id="modal-overlay" class="hidden" onclick="closeModal(event)">
   <div class="modal-box">
@@ -668,6 +946,7 @@ textarea{resize:vertical}
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer">
       <button class="btn-sm danger" id="btn-delete" onclick="deleteFromModal()">🗑 Eliminar</button>
+      <button class="btn-sm" style="border-color:var(--b400);color:var(--b600)" onclick="window.openEval(window._currentModalId)">📋 Evaluar iniciativa</button>
       <button class="btn-sm" onclick="closeModal()">Cerrar</button>
     </div>
   </div>
@@ -804,6 +1083,11 @@ window.logout = function(){
   document.getElementById('screen-success').style.display='none';
   document.getElementById('il-form').reset();
   document.querySelectorAll('.pilar-btn.on,.kpi-chip.on').forEach(b=>b.classList.remove('on'));
+  // Reset native selects
+  const cplxSel = document.getElementById('complejidad-val');
+  if(cplxSel) cplxSel.selectedIndex = 0;
+  const areasSel = document.getElementById('areas-select');
+  if(areasSel) [...areasSel.options].forEach(o=>o.selected=false);
   selectedKpi=''; uploadedFiles=[];
   document.getElementById('upload-list').innerHTML='';
   document.getElementById('admin-user').value='';
@@ -895,7 +1179,8 @@ function validateForm(d){
     { key:'nombre',     id:'field-nombre',    label:'Nombre de la iniciativa' },
     { key:'po',         id:'field-po',        label:'Product Owner' },
     { key:'zona',       id:'field-zona',      label:'Región / Plaza' },
-    { key:'problema',   id:'field-problema',  label:'Problema que resuelve' },
+    { key:'problema',   id:'field-problema',  label:'Situación actual' },
+    { key:'impacto',    id:'field-impacto',   label:'Impacto generado' },
     { key:'solucion',   id:'field-solucion',  label:'Solución propuesta' },
     { key:'objetivo',   id:'field-objetivo',  label:'Objetivo' },
     { key:'alcance',    id:'field-alcance',   label:'Alcance' },
@@ -940,13 +1225,18 @@ window.submitForm = async function(e){
       nombre:d.nombre, po:d.po, zona:d.zona, duracion:d.duracion||'',
       kpi_tipo:selectedKpi,
       kpi_principal:d.kpi_principal, kpi_tiendas:d.kpi_tiendas||'',
-      kpi_plazo:d.kpi_plazo||'', kpi_meta:d.kpi_meta||'',
-      problema:d.problema, solucion:d.solucion,
+      kpi_plazo:d.kpi_plazo||'',
+      meta_situacion:d.meta_situacion||'', kpi_meta:d.kpi_meta||'',
+      impacto_financiero:d.impacto_financiero||'',
+      problema:d.problema, impacto:d.impacto||'', solucion:d.solucion,
       objetivo:d.objetivo, alcance:d.alcance,
-      act1:d.act1||'', act2:d.act2||'', act3:d.act3||'',
+
       inversion:d.inversion||'',
       ben1:d.ben1||'', ben2:d.ben2||'', ben3:d.ben3||'',
       pilares:getSelectedPilares(),
+      complejidad:d.complejidad||'',
+      areas:getSelectedAreas(),
+      inv_situacion:d.inv_situacion||'', inv_resultado:d.inv_resultado||'', inv_impacto:d.inv_impacto||'',
       firma_po:d.firma_po,
       fecha:d.fecha||new Date().toISOString().split('T')[0],
       registrado:new Date().toLocaleString('es-MX'),
@@ -956,6 +1246,11 @@ window.submitForm = async function(e){
     // Reset form state
     e.target.reset();
     document.querySelectorAll('.pilar-btn.on,.kpi-chip.on').forEach(b=>b.classList.remove('on'));
+  // Reset native selects
+  const cplxSel = document.getElementById('complejidad-val');
+  if(cplxSel) cplxSel.selectedIndex = 0;
+  const areasSel = document.getElementById('areas-select');
+  if(areasSel) [...areasSel.options].forEach(o=>o.selected=false);
     document.querySelectorAll('.field-error').forEach(el=>el.classList.remove('field-error'));
     selectedKpi=''; uploadedFiles=[];
     document.getElementById('upload-list').innerHTML='';
@@ -995,10 +1290,13 @@ window.renderCards = function(){
   const q=(document.getElementById('filter-search').value||'').toLowerCase();
   const fk=document.getElementById('filter-kpi').value;
   const fz=document.getElementById('filter-zona').value;
+  const fe=document.getElementById('filter-eval').value;
   let ils=ilsCache;
   if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
   if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
   if(fz) ils=ils.filter(i=>i.zona===fz);
+  if(fe==='evaluated') ils=ils.filter(i=>i.evaluacion);
+  if(fe==='pending')   ils=ils.filter(i=>!i.evaluacion);
   document.getElementById('filters-count').textContent=ils.length===1?'1 iniciativa':`${ils.length} iniciativas`;
   if(currentView==='list'){ renderList(); return; }
   const grid=document.getElementById('cards-grid');
@@ -1029,10 +1327,19 @@ window.renderCards = function(){
       </div>
       <div class="il-card-bottom">
         <div class="il-card-pilares">${pils}</div>
-        ${hasDocs
-          ? `<div class="il-card-docs">📎 ${(il.docs||[]).length} doc${(il.docs||[]).length>1?'s':''}</div>`
-          : `<span style="font-family:var(--ff-mono);font-size:9px;color:var(--muted)">${il.fecha||''}</span>`}
+        <div style="display:flex;align-items:center;gap:6px">
+          ${hasDocs?`<div class="il-card-docs">📎 ${(il.docs||[]).length} doc${(il.docs||[]).length>1?'s':''}</div>`:''}
+          ${il.evaluacion
+            ? `<span class="eval-status-badge evaluated">✅ Evaluada<span class="eval-score-mini" style="color:var(--teal)">${il.evaluacion.score||'—'}</span></span>`
+            : `<span class="eval-status-badge pending">⏳ Pendiente</span>`}
+        </div>
       </div>
+      ${il.evaluacion ? `
+      <div class="il-card-eval">
+        <span class="eval-decision-pill ${il.evaluacion.decision==='Aprobada'?'approved':il.evaluacion.decision==='Condicional'?'conditional':'rejected'}">${il.evaluacion.decision||'—'}</span>
+        <span style="font-size:10px;color:var(--muted);font-family:var(--ff-mono)">Score: <strong style="color:var(--ink)">${il.evaluacion.score||'—'}</strong>/100</span>
+        ${il.evaluacion.comentarios?`<span style="font-size:10px;color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(il.evaluacion.comentarios)}">"${esc(il.evaluacion.comentarios.substring(0,60))}${il.evaluacion.comentarios.length>60?'...':''}"</span>`:''}
+      </div>` : ''}
     </div>`;
   }).join('');
 };
@@ -1041,49 +1348,77 @@ window.renderCards = function(){
 window.openModal = function(id){
   const il=ilsCache.find(i=>i.id===id); if(!il) return;
   modalId=id;
+  window._currentModalId=id;
   document.getElementById('modal-title').textContent=il.nombre;
   document.getElementById('modal-sub').textContent=`${il.folio?il.folio+' · ':''}${il.po} · ${il.zona}${il.kpi_tipo?' · '+il.kpi_tipo:''}`;
   const pils=(il.pilares||[]).map(p=>`<span class="pilar-tag">${esc(p)}</span>`).join(' ');
   const bens=[il.ben1,il.ben2,il.ben3].filter(Boolean).map(b=>`<div style="display:flex;gap:8px;margin-bottom:5px"><span style="color:var(--accent);font-weight:700">→</span><span style="font-size:13px">${esc(b)}</span></div>`).join('');
-  const acts=[[il.act1,'1'],[il.act2,'2'],[il.act3,'3']].filter(a=>a[0]).map(a=>`<div style="background:var(--b50);border-radius:8px;padding:12px;position:relative"><div style="font-family:var(--ff-display);font-size:28px;color:rgba(0,0,0,.05);position:absolute;top:2px;right:8px;line-height:1">${a[1]}</div><div style="font-size:13px;line-height:1.6">${esc(a[0])}</div></div>`).join('');
+
   const docs=il.docs||[];
   const docsHtml=docs.length
     ?`<div class="modal-section"><div class="modal-section-title">📎 Documentos adjuntos (${docs.length})</div><div class="modal-doc-list">${docs.map(doc=>`<a class="modal-doc-item" href="${doc.dataUrl}" download="${esc(doc.name)}" onclick="event.stopPropagation()"><span class="modal-doc-icon">${fileIcon(doc.type)}</span><span class="modal-doc-name">${esc(doc.name)}</span><span class="modal-doc-size">${fmtSize(doc.size)}</span><span class="modal-doc-dl">⬇</span></a>`).join('')}</div></div>`
     :`<div class="modal-section"><div class="modal-section-title">📎 Documentos adjuntos</div><div style="font-size:13px;color:var(--muted);padding:8px 0">Sin documentos adjuntos</div></div>`;
   document.getElementById('modal-body').innerHTML=`
-    <div class="modal-section"><div class="modal-section-title">KPIs e indicadores</div>
-      <div class="modal-kpi-row">
-        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_principal||'—')}</div><div class="modal-kpi-label">${esc(il.kpi_tipo||'KPI')}</div></div>
-        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_tiendas||'—')}</div><div class="modal-kpi-label">Tiendas piloto</div></div>
-        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_plazo||'—')}</div><div class="modal-kpi-label">Plazo</div></div>
-        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_meta||'—')}</div><div class="modal-kpi-label">Meta financiera</div></div>
-      </div>
-    </div>
-    <div class="modal-section"><div class="modal-section-title">Problema y solución</div>
-      <div class="modal-grid-2">
-        <div class="modal-field"><div class="modal-field-label">Problema detectado</div><div class="modal-field-value">${esc(il.problema||'—')}</div></div>
+
+    <div class="modal-section"><div class="modal-section-title">Diagnóstico y propuesta</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="modal-field"><div class="modal-field-label">Situación actual</div><div class="modal-field-value">${esc(il.problema||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Impacto generado</div><div class="modal-field-value">${esc(il.impacto||'—')}</div></div>
         <div class="modal-field"><div class="modal-field-label">Solución propuesta</div><div class="modal-field-value">${esc(il.solucion||'—')}</div></div>
       </div>
-    </div>
-    <div class="modal-section"><div class="modal-section-title">Objetivo y alcance</div>
       <div class="modal-grid-2">
         <div class="modal-field"><div class="modal-field-label">Objetivo</div><div class="modal-field-value">${esc(il.objetivo||'—')}</div></div>
         <div class="modal-field"><div class="modal-field-label">Alcance</div><div class="modal-field-value">${esc(il.alcance||'—')}</div></div>
       </div>
     </div>
-    ${acts?`<div class="modal-section"><div class="modal-section-title">Actividades clave</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">${acts}</div></div>`:''}
-    <div class="modal-section"><div class="modal-section-title">Inversión y beneficios</div>
-      <div class="modal-grid-2">
-        <div class="modal-field"><div class="modal-field-label">Inversión estimada</div><div class="modal-field-value" style="font-family:var(--ff-display);font-size:26px;color:var(--ink)">${esc(il.inversion||'N/D')}</div></div>
+
+
+    <div class="modal-section"><div class="modal-section-title">Indicadores e impacto</div>
+      <!-- KPI row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_principal||'—')}</div><div class="modal-kpi-label">${esc(il.kpi_tipo||'KPI principal')}</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_tiendas||'—')}</div><div class="modal-kpi-label">Tiendas piloto</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_plazo||'—')}</div><div class="modal-kpi-label">Plazo</div></div>
+      </div>
+      <!-- Impacto financiero row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+        <div class="modal-kpi"><div class="modal-kpi-val" style="font-size:18px">${esc(il.inv_situacion||'—')}</div><div class="modal-kpi-label">Situación actual</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val" style="font-size:18px">${esc(il.inv_resultado||'—')}</div><div class="modal-kpi-label">Resultado esperado</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val" style="font-size:18px">${esc(il.inv_impacto||'—')}</div><div class="modal-kpi-label">Impacto financiero adicional</div></div>
+      </div>
+      <div class="modal-field"><div class="modal-field-label">Inversión estimada</div><div class="modal-field-value" style="font-family:var(--ff-display);font-size:26px;color:var(--ink)">${esc(il.inversion||'N/D')}</div></div>
         <div class="modal-field"><div class="modal-field-label">Beneficios esperados</div>${bens||'<div style="font-size:13px;color:var(--muted)">No especificados</div>'}</div>
       </div>
     </div>
     ${pils?`<div class="modal-section"><div class="modal-section-title">Alineación estratégica</div><div style="display:flex;flex-wrap:wrap;gap:6px">${pils}</div></div>`:''}
     ${docsHtml}
+    ${il.evaluacion ? `
+    <div class="modal-section">
+      <div class="modal-section-title">📋 Evaluación del panel</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+        <div class="modal-kpi" style="background:${il.evaluacion.decision==='Aprobada'?'#DCFCE7':il.evaluacion.decision==='Condicional'?'#FEF3C7':'#FEE2E2'}">
+          <div class="modal-kpi-val" style="font-size:18px;color:${il.evaluacion.decision==='Aprobada'?'#14532D':il.evaluacion.decision==='Condicional'?'#92400E':'#7F1D1D'}">${esc(il.evaluacion.decision||'—')}</div>
+          <div class="modal-kpi-label">Decisión</div>
+        </div>
+        <div class="modal-kpi">
+          <div class="modal-kpi-val" style="font-size:28px">${esc(il.evaluacion.score||'—')}</div>
+          <div class="modal-kpi-label">Score / 100</div>
+        </div>
+        <div class="modal-kpi">
+          <div class="modal-kpi-val" style="font-size:11px;color:var(--muted);font-family:var(--ff-mono)">${esc(il.evaluacion.evaluadoEl||'—')}</div>
+          <div class="modal-kpi-label">Fecha evaluación</div>
+        </div>
+      </div>
+      ${il.evaluacion.fortalezas?`<div class="modal-field" style="margin-bottom:8px"><div class="modal-field-label">Fortalezas</div><div class="modal-field-value" style="font-size:13px;background:var(--b50);padding:8px 12px;border-radius:6px">${esc(il.evaluacion.fortalezas)}</div></div>`:''}
+      ${il.evaluacion.oportunidades?`<div class="modal-field" style="margin-bottom:8px"><div class="modal-field-label">Áreas de oportunidad</div><div class="modal-field-value" style="font-size:13px;background:var(--b50);padding:8px 12px;border-radius:6px">${esc(il.evaluacion.oportunidades)}</div></div>`:''}
+      ${il.evaluacion.comentarios?`<div class="modal-field"><div class="modal-field-label">Comentarios y próximos pasos</div><div class="modal-field-value" style="font-size:13px;background:var(--b50);padding:8px 12px;border-radius:6px">${esc(il.evaluacion.comentarios)}</div></div>`:''}
+    </div>` : ''}
     <div class="modal-section"><div class="modal-section-title">Registro</div>
       <div style="display:flex;gap:24px;flex-wrap:wrap">
         ${il.folio?`<div class="modal-field"><div class="modal-field-label">Folio</div><div class="modal-field-value" style="font-family:var(--ff-display);font-size:22px;color:var(--b600);letter-spacing:.06em">${esc(il.folio)}</div></div>`:''}
         <div class="modal-field"><div class="modal-field-label">Product Owner</div><div class="modal-field-value">${esc(il.firma_po||il.po||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Complejidad</div><div class="modal-field-value">${il.complejidad?`<strong>${esc(il.complejidad)}/10</strong>`:'—'}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Áreas involucradas</div><div class="modal-field-value" style="font-size:12px">${(il.areas||[]).length?il.areas.map(a=>`<span style="display:inline-block;background:var(--b100);color:var(--b700);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:600;margin:2px">${esc(a)}</span>`).join(''):'—'}</div></div>
         <div class="modal-field"><div class="modal-field-label">Fecha</div><div class="modal-field-value">${esc(il.fecha||'—')}</div></div>
         <div class="modal-field"><div class="modal-field-label">Registrado</div><div class="modal-field-value" style="font-size:12px">${esc(il.registrado||'—')}</div></div>
       </div>
@@ -1129,25 +1464,31 @@ window.renderList = function(){
   const q=(document.getElementById('filter-search').value||'').toLowerCase();
   const fk=document.getElementById('filter-kpi').value;
   const fz=document.getElementById('filter-zona').value;
+  const fe=document.getElementById('filter-eval').value;
   let ils=ilsCache;
   if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
   if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
   if(fz) ils=ils.filter(i=>i.zona===fz);
+  if(fe==='evaluated') ils=ils.filter(i=>i.evaluacion);
+  if(fe==='pending')   ils=ils.filter(i=>!i.evaluacion);
   const tbody = document.getElementById('list-tbody');
   if(!ils.length){
     tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--muted)">Sin iniciativas que coincidan con los filtros</td></tr>`;
     return;
   }
   tbody.innerHTML = ils.map(il=>`
-    <tr onclick="openModal('${il.id}')">
+    <tr onclick="openModal('${il.id}')" style="${il.evaluacion?'background:var(--b50)':''}">
       <td>${il.folio?`<span class="list-folio">${esc(il.folio)}</span>`:'—'}</td>
-      <td style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(il.nombre)}</td>
+      <td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(il.nombre)}</td>
       <td>${esc(il.po||'—')}</td>
       <td>${esc(il.zona||'—')}</td>
       <td>${il.kpi_tipo?`<span class="list-kpi-badge">${esc(il.kpi_tipo)}</span>`:'—'}</td>
       <td><span class="list-kpi-val">${esc(il.kpi_principal||'—')}</span></td>
       <td style="text-align:center">${esc(il.kpi_tiendas||'—')}</td>
       <td>${esc(il.inversion||'—')}</td>
+      <td>${il.evaluacion?`<span class="eval-status-badge evaluated" style="font-size:8px">✅ Evaluada</span>`:`<span class="eval-status-badge pending" style="font-size:8px">⏳ Pendiente</span>`}</td>
+      <td style="text-align:center">${il.evaluacion?`<span class="list-eval-score">${il.evaluacion.score}</span>`:'—'}</td>
+      <td>${il.evaluacion?`<span class="eval-decision-pill ${il.evaluacion.decision==='Aprobada'?'approved':il.evaluacion.decision==='Condicional'?'conditional':'rejected'}" style="font-size:8px">${il.evaluacion.decision}</span>`:'—'}</td>
       <td class="list-docs">${(il.docs||[]).length>0?`📎 ${(il.docs||[]).length}`:'—'}</td>
       <td class="list-date">${esc(il.fecha||'—')}</td>
     </tr>`).join('');
@@ -1158,20 +1499,32 @@ window.exportExcel = function(){
   const q=(document.getElementById('filter-search').value||'').toLowerCase();
   const fk=document.getElementById('filter-kpi').value;
   const fz=document.getElementById('filter-zona').value;
+  const fe=document.getElementById('filter-eval').value;
   let ils=ilsCache;
   if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
   if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
   if(fz) ils=ils.filter(i=>i.zona===fz);
+  if(fe==='evaluated') ils=ils.filter(i=>i.evaluacion);
+  if(fe==='pending')   ils=ils.filter(i=>!i.evaluacion);
 
-  const headers = ['Folio','Iniciativa','Product Owner','Región/Plaza','KPI Tipo','Meta KPI','Tiendas Piloto','Plazo','Meta Financiera','Inversión','Objetivo','Problema','Solución','Alcance','Actividad 1','Actividad 2','Actividad 3','Beneficio 1','Beneficio 2','Beneficio 3','Fecha','Registrado','Documentos'];
+  const headers = ['Folio','Iniciativa','Product Owner','Región/Plaza','KPI Tipo','Meta KPI','Tiendas Piloto','Plazo','Situación Actual Indicador','Resultado Esperado','Impacto Financiero Adicional','Inversión','Objetivo','Situación Actual','Impacto Generado','Solución','Alcance','Complejidad','Áreas','Beneficio 1','Beneficio 2','Beneficio 3','Estado Eval.','Score','Decisión','Comentarios','Fortalezas','Oportunidades','Fecha Evaluación','Fecha','Registrado','Documentos'];
 
   const rows = ils.map(il=>[
     il.folio||'', il.nombre||'', il.po||'', il.zona||'',
     il.kpi_tipo||'', il.kpi_principal||'', il.kpi_tiendas||'',
-    il.kpi_plazo||'', il.kpi_meta||'', il.inversion||'',
-    il.objetivo||'', il.problema||'', il.solucion||'', il.alcance||'',
-    il.act1||'', il.act2||'', il.act3||'',
+    il.kpi_plazo||'', il.meta_situacion||'', il.kpi_meta||'',
+    il.impacto_financiero||'', il.inversion||'',
+    il.objetivo||'', il.problema||'', il.impacto||'',
+    il.solucion||'', il.alcance||'',
+    il.complejidad||'', (il.areas||[]).join('; ')||'',
     il.ben1||'', il.ben2||'', il.ben3||'',
+    il.evaluacion?'Evaluada':'Pendiente',
+    il.evaluacion?.score||'',
+    il.evaluacion?.decision||'',
+    il.evaluacion?.comentarios||'',
+    il.evaluacion?.fortalezas||'',
+    il.evaluacion?.oportunidades||'',
+    il.evaluacion?.evaluadoEl||'',
     il.fecha||'', il.registrado||'',
     (il.docs||[]).map(d=>d.name).join(', ')
   ]);
@@ -1191,6 +1544,260 @@ window.exportExcel = function(){
   showToast('✅  Exportado correctamente');
 };
 
+/* ── Complejidad ── */
+const CPLX_LABELS = {
+  1:'Muy simple — implementación directa sin dependencias',
+  2:'Muy simple — implementación directa sin dependencias',
+  3:'Simple — pocas áreas involucradas',
+  4:'Simple — pocas áreas involucradas',
+  5:'Moderada — requiere coordinación entre áreas',
+  6:'Moderada — requiere coordinación entre áreas',
+  7:'Alta — múltiples dependencias y seguimiento cercano',
+  8:'Alta — múltiples dependencias y seguimiento cercano',
+  9:'Muy alta — ejecución crítica y riesgo operativo',
+  10:'Muy alta — ejecución crítica y riesgo operativo',
+};
+// setComplejidad — kept for backwards compat, now complejidad uses native <select>
+window.setComplejidad = function(el){};
+
+/* ── Áreas involucradas ── */
+window.toggleArea = function(el){ el.classList.toggle('on') };
+function getSelectedAreas(){
+  const sel = document.getElementById('areas-select');
+  if(!sel) return [];
+  return [...sel.selectedOptions].map(o=>o.value);
+}
+
+/* ── Eval state ── */
+let evalId = null;
+let evalDecision = '';
+const WEIGHTS = [0.30, 0.20, 0.20, 0.20, 0.10];
+
+window.updateScore = function(el, idx){
+  document.getElementById('sn'+idx).textContent = el.value;
+  recalcTotal();
+};
+
+function recalcTotal(){
+  let total = 0;
+  for(let i=0;i<5;i++){
+    const v = parseInt(document.getElementById('sc'+i).value)||0;
+    total += v * WEIGHTS[i] * 10;
+  }
+  document.getElementById('score-total').textContent = total.toFixed(1);
+  const el = document.getElementById('score-total');
+  el.style.color = total>=70?'#86EFAC':total>=50?'#FDE68A':'#FCA5A5';
+}
+
+window.setDecision = function(d){
+  evalDecision = d;
+  ['approved','conditional','rejected'].forEach(k=>{
+    document.getElementById('dec-'+k).classList.remove('on-approved','on-conditional','on-rejected');
+  });
+  if(d==='Aprobada')    document.getElementById('dec-approved').classList.add('on-approved');
+  if(d==='Condicional') document.getElementById('dec-conditional').classList.add('on-conditional');
+  if(d==='No aprobada') document.getElementById('dec-rejected').classList.add('on-rejected');
+};
+
+window.openEval = function(id){
+  const il = ilsCache.find(i=>i.id===id); if(!il) return;
+  evalId = id;
+  // Close main modal first
+  document.getElementById('modal-overlay').classList.add('hidden');
+  // Set header
+  document.getElementById('eval-title').textContent = il.folio ? il.folio+' · Evaluación' : 'Evaluación de iniciativa';
+  document.getElementById('eval-sub').textContent = il.nombre+' · '+il.po+' · '+il.zona;
+  // Reset scores to 5
+  for(let i=0;i<5;i++){
+    document.getElementById('sc'+i).value=5;
+    document.getElementById('sn'+i).textContent='5';
+  }
+  recalcTotal();
+  // Reset decision
+  evalDecision='';
+  ['approved','conditional','rejected'].forEach(k=>document.getElementById('dec-'+k).classList.remove('on-approved','on-conditional','on-rejected'));
+  document.getElementById('eval-comentarios').value='';
+  document.getElementById('eval-fortalezas').value='';
+  document.getElementById('eval-oportunidades').value='';
+  document.getElementById('eval-overlay').classList.remove('hidden');
+};
+
+window.closeEval = function(e){
+  if(e&&e.target!==document.getElementById('eval-overlay')) return;
+  document.getElementById('eval-overlay').classList.add('hidden');
+  evalId=null;
+};
+
+/* ── Export eval as PDF ── */
+window.exportEvalPDF = function(){
+  const il = ilsCache.find(i=>i.id===evalId);
+  if(!il){ showToast('⚠️ No hay iniciativa seleccionada','#B91C1C'); return; }
+
+  const scores = [];
+  const labels = ['Impacto venta/tráfico','Claridad objetivo','Viabilidad plan','Escalabilidad','Alineación nacional'];
+  let total=0;
+  for(let i=0;i<5;i++){
+    const v=parseInt(document.getElementById('sc'+i).value)||0;
+    scores.push({label:labels[i], val:v, weight:WEIGHTS[i]});
+    total+=v*WEIGHTS[i]*10;
+  }
+  const decision = evalDecision||'Sin definir';
+  const comentarios = document.getElementById('eval-comentarios').value||'—';
+  const fortalezas  = document.getElementById('eval-fortalezas').value||'—';
+  const oportunidades = document.getElementById('eval-oportunidades').value||'—';
+  const fecha = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+  const decColor = decision==='Aprobada'?'#16A34A':decision==='Condicional'?'#D97706':'#DC2626';
+
+  function esc2(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<title>Retroalimentación ${il.folio||''} · ${il.nombre}</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;color:#0F2236;background:#fff;padding:32px 40px;font-size:13px}
+  .header{background:#0D1B2A;color:#fff;padding:24px 28px;border-radius:10px;margin-bottom:24px}
+  .header-badge{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#93C5F8;margin-bottom:6px}
+  .header-title{font-size:22px;font-weight:800;margin-bottom:4px}
+  .header-sub{font-size:11px;color:rgba(255,255,255,.5)}
+  .section{margin-bottom:20px}
+  .section-title{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#5A7FA8;font-weight:600;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #C7DCEF}
+  .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}
+  .info-cell{background:#EFF6FF;border-radius:6px;padding:10px 12px}
+  .info-label{font-size:9px;color:#5A7FA8;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+  .info-val{font-size:14px;font-weight:700;color:#0F2236}
+  .score-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#F8FAFC;border-radius:6px;margin-bottom:6px;border:1px solid #E2E8F0}
+  .score-label{flex:1;font-size:12px;font-weight:600}
+  .score-weight{font-size:10px;color:#5A7FA8;width:30px;text-align:right}
+  .score-bar-wrap{width:120px;height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden}
+  .score-bar{height:8px;border-radius:4px;background:#2563B8}
+  .score-val{font-size:14px;font-weight:800;color:#2563B8;width:24px;text-align:center}
+  .total-box{background:#0D1B2A;color:#fff;border-radius:8px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;margin:12px 0 20px}
+  .total-label{font-size:12px;color:rgba(255,255,255,.6);font-weight:600}
+  .total-val{font-size:32px;font-weight:800;color:#93C5F8}
+  .decision-box{padding:12px 18px;border-radius:8px;font-size:14px;font-weight:800;display:inline-block;margin-bottom:18px;color:#fff;background:${decColor}}
+  .comment-box{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:14px 16px;font-size:12px;line-height:1.7;color:#2C4A6E;white-space:pre-wrap}
+  .footer{margin-top:28px;padding-top:14px;border-top:1px solid #E2E8F0;font-size:10px;color:#5A7FA8;display:flex;justify-content:space-between}
+  @media print{body{padding:20px 28px}}
+</style></head><body>
+  <div class="header">
+    <div class="header-badge">🦈 Shark Tank · Región Veracruz · Agile Hub · 2026</div>
+    <div class="header-title">Retroalimentación de Iniciativa · ${esc2(il.folio||'')}</div>
+    <div class="header-sub">${esc2(il.nombre)} &nbsp;·&nbsp; ${esc2(il.po)} &nbsp;·&nbsp; ${esc2(il.zona)} &nbsp;·&nbsp; Evaluado el ${fecha}</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Datos de la iniciativa</div>
+    <div class="info-grid">
+      <div class="info-cell"><div class="info-label">KPI principal</div><div class="info-val">${esc2(il.kpi_tipo||'—')}</div></div>
+      <div class="info-cell"><div class="info-label">Meta</div><div class="info-val">${esc2(il.kpi_principal||'—')}</div></div>
+      <div class="info-cell"><div class="info-label">Tiendas piloto</div><div class="info-val">${esc2(il.kpi_tiendas||'—')}</div></div>
+      <div class="info-cell"><div class="info-label">Plazo</div><div class="info-val">${esc2(il.kpi_plazo||'—')}</div></div>
+      <div class="info-cell"><div class="info-label">Inversión</div><div class="info-val">${esc2(il.inversion||'—')}</div></div>
+      <div class="info-cell"><div class="info-label">Complejidad</div><div class="info-val">${esc2(il.complejidad||'—')} / 10</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Criterios de evaluación</div>
+    ${scores.map(s=>`<div class="score-row">
+      <div class="score-label">${esc2(s.label)}</div>
+      <div class="score-weight">${Math.round(s.weight*100)}%</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:${s.val*10}%"></div></div>
+      <div class="score-val">${s.val}</div>
+    </div>`).join('')}
+    <div class="total-box"><div class="total-label">Score ponderado (0–100)</div><div class="total-val">${total.toFixed(1)}</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Decisión del panel</div>
+    <div class="decision-box">${esc2(decision)}</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Fortalezas identificadas</div>
+    <div class="comment-box">${esc2(fortalezas)}</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Áreas de oportunidad</div>
+    <div class="comment-box">${esc2(oportunidades)}</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Comentarios y próximos pasos</div>
+    <div class="comment-box">${esc2(comentarios)}</div>
+  </div>
+
+  <div class="footer">
+    <span>Shark Tank · Región Veracruz 2026 · Agile Hub · Connecting Teams, Driving Agility</span>
+    <span>Folio: ${esc2(il.folio||'—')} · ${fecha}</span>
+  </div>
+</body></html>`;
+
+  // Open in new tab — if popup blocked, fallback to blob download
+  try {
+    const win = window.open('','_blank');
+    if(win && !win.closed){
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+      setTimeout(()=>{ win.print(); }, 700);
+      showToast('📄 PDF abierto — usa Ctrl+P para guardar');
+    } else {
+      // Fallback: download as HTML if popup blocked
+      const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href=url; a.download=`Evaluacion_${(il.folio||'IL').replace('/','_')}.html`;
+      a.click(); URL.revokeObjectURL(url);
+      showToast('📄 Archivo descargado — ábrelo e imprime como PDF');
+    }
+  } catch(err){
+    showToast('⚠️  Error al generar PDF: '+err.message,'#B91C1C');
+  }
+};
+
+/* ── Save Evaluation to Firestore ── */
+window.saveEval = async function(){
+  if(!evalId){ showToast('⚠️ Sin iniciativa seleccionada','#B91C1C'); return; }
+  if(!evalDecision){ showToast('⚠️ Selecciona una decisión del panel','#B91C1C'); return; }
+
+  // Collect scores
+  const labels=['Impacto venta/tráfico','Claridad objetivo','Viabilidad plan','Escalabilidad','Alineación nacional'];
+  const scores={};
+  let total=0;
+  for(let i=0;i<5;i++){
+    const v=parseInt(document.getElementById('sc'+i).value)||0;
+    scores[labels[i]]=v;
+    total+=v*WEIGHTS[i]*10;
+  }
+
+  const evalData = {
+    scores,
+    score: total.toFixed(1),
+    decision: evalDecision,
+    comentarios: document.getElementById('eval-comentarios').value||'',
+    fortalezas:  document.getElementById('eval-fortalezas').value||'',
+    oportunidades: document.getElementById('eval-oportunidades').value||'',
+    evaluadoEl: new Date().toLocaleString('es-MX'),
+  };
+
+  // Save to Firestore as a sub-field of the IL document
+  const btn = document.querySelector('.eval-footer .btn-sm[onclick="saveEval()"]');
+  if(btn){ btn.disabled=true; btn.textContent='Guardando...'; }
+  try {
+    const { doc: fbDoc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    await updateDoc(fbDoc(db,'shark_ils_2026', evalId), { evaluacion: evalData });
+    showToast('✅ Evaluación guardada correctamente');
+    document.getElementById('eval-overlay').classList.add('hidden');
+    evalId=null;
+  } catch(err){
+    showToast('❌ Error al guardar: '+err.message,'#B91C1C');
+  } finally {
+    if(btn){ btn.disabled=false; btn.innerHTML='💾 Guardar evaluación'; }
+  }
+};
+
 /* ── Helpers ── */
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 window.esc=esc;
@@ -1203,7 +1810,7 @@ function showToast(msg,bg='var(--success)'){
 }
 window.showToast=showToast;
 
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') window.closeModal() });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ window.closeModal(); window.closeEval && window.closeEval(); } });
 
 /* ── Boot ── */
 boot();
