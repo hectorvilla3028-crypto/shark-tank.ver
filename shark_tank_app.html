@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shark Tank · Región Veracruz 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --b900:#0D1B2A;--b800:#1B3A5C;--b700:#1E4D8C;--b600:#2563B8;
+  --b500:#3B82D4;--b400:#60A5E8;--b300:#93C5F8;--b200:#BFDBFE;
+  --b100:#DBEAFE;--b50:#EFF6FF;
+  --dark:var(--b900);--ink:#0F2236;--mid:#2C4A6E;
+  --muted:#5A7FA8;--line:#C7DCEF;--surface:#F0F6FC;
+  --white:#FFFFFF;--success:#0A5C47;--danger:#B91C1C;
+  --accent:var(--b600);
+  --ff-display:'Bebas Neue',sans-serif;
+  --ff-body:'Syne',sans-serif;
+  --ff-mono:'DM Mono',monospace;
+  --radius:10px;
+}
+html{font-size:16px}
+body{font-family:var(--ff-body);background:var(--surface);color:var(--ink);min-height:100vh;overflow-x:hidden}
+input,textarea,select,button{font-family:inherit}
+button{cursor:pointer;border:none;background:none}
+textarea{resize:vertical}
+.hidden{display:none!important}
+
+/* ══ FIREBASE CONFIG BANNER ══════════════════════ */
+#fb-config-screen{
+  display:none!important;
+  background:var(--b900);padding:32px 20px;
+}
+.fb-config-box{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:36px 32px;width:100%;max-width:520px;
+}
+.fb-config-title{
+  font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;
+  color:var(--white);margin-bottom:6px;
+}
+.fb-config-title span{color:var(--b400)}
+.fb-config-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:24px;line-height:1.6}
+.fb-step{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:14px 16px;margin-bottom:12px;
+}
+.fb-step-num{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;color:var(--b300);text-transform:uppercase;margin-bottom:6px}
+.fb-step-text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}
+.fb-step-text code{font-family:var(--ff-mono);font-size:11px;background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;color:var(--b300)}
+.fb-divider{height:1px;background:rgba(255,255,255,.08);margin:20px 0}
+.fb-field-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;display:block}
+.fb-input{
+  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:7px;padding:10px 14px;font-size:13px;color:var(--white);outline:none;
+  margin-bottom:10px;font-family:var(--ff-mono);transition:border-color .15s;
+}
+.fb-input:focus{border-color:var(--b300)}
+.fb-input::placeholder{color:rgba(255,255,255,.25)}
+.fb-err{font-size:11px;color:#FCA5A5;font-family:var(--ff-mono);margin-top:-6px;margin-bottom:10px;display:none}
+.fb-err.show{display:block}
+.fb-btn{
+  width:100%;padding:13px;border-radius:8px;background:var(--b600);color:var(--white);
+  font-family:var(--ff-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:500;transition:background .15s;margin-top:6px;
+}
+.fb-btn:hover{background:var(--b500)}
+.fb-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:14px;line-height:1.6;text-align:center}
+
+
+/* ══ SUCCESS SCREEN ══════════════════════════════ */
+#screen-success{display:none;min-height:100vh;background:var(--b900);align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden}
+#screen-success::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(37,99,184,.05) 60px,rgba(37,99,184,.05) 61px);pointer-events:none}
+.success-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:48px 40px;width:100%;max-width:520px;text-align:center;position:relative;z-index:1}
+.success-icon{font-size:64px;margin-bottom:20px;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.success-tag{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--b300);margin-bottom:12px}
+.success-title{font-family:var(--ff-display);font-size:40px;letter-spacing:.04em;color:var(--white);line-height:.95;margin-bottom:16px}
+.success-title span{color:var(--b400)}
+.success-folio-box{background:rgba(255,255,255,.08);border:1.5px solid rgba(96,165,232,.4);border-radius:12px;padding:24px 32px;margin:24px 0}
+.success-folio-label{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.success-folio-num{font-family:var(--ff-display);font-size:52px;letter-spacing:.08em;color:var(--b300);line-height:1}
+.success-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:28px}
+.success-desc strong{color:rgba(255,255,255,.75)}
+.success-btn{display:inline-flex;align-items:center;gap:8px;background:var(--b600);color:var(--white);padding:13px 28px;border-radius:8px;font-family:var(--ff-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;transition:background .15s}
+.success-btn:hover{background:var(--b500)}
+/* Field error highlight */
+.field-error{border-color:#EF4444!important;box-shadow:0 0 0 3px rgba(239,68,68,.15)!important}
+.field-error-msg{font-size:11px;color:#EF4444;font-family:var(--ff-mono);margin-top:4px;display:none}
+.field-error-msg.show{display:block}
+
+/* ══ LOGIN ══════════════════════════════════════ */
+#screen-login{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:40px 20px;
+  background:var(--b900);position:relative;overflow:hidden;
+}
+#screen-login::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(37,99,184,.06) 60px,rgba(37,99,184,.06) 61px);
+  pointer-events:none;
+}
+#screen-login::after{
+  content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,212,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.login-brand{text-align:center;margin-bottom:44px;position:relative;z-index:1}
+.login-shark{font-size:52px;line-height:1;margin-bottom:10px}
+.login-title{font-family:var(--ff-display);font-size:56px;letter-spacing:.04em;color:var(--white);line-height:.9}
+.login-title span{color:var(--b400)}
+.login-sub{font-family:var(--ff-mono);font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:10px}
+.login-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:580px;position:relative;z-index:1}
+@media(max-width:520px){.login-cards{grid-template-columns:1fr}}
+.profile-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:28px 24px;cursor:pointer;
+  transition:background .2s,border-color .2s,transform .15s;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+}
+.profile-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--card-accent);transform:scaleX(0);transition:transform .2s;transform-origin:left}
+.profile-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.profile-card:hover::after{transform:scaleX(1)}
+.profile-card.po{--card-accent:var(--b400)}
+.card-icon{width:44px;height:44px;border-radius:8px;background:var(--card-accent);display:flex;align-items:center;justify-content:center;font-size:20px}
+.card-role{font-family:var(--ff-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--card-accent)}
+.card-title{font-size:18px;font-weight:700;color:var(--white)}
+.card-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
+.card-arrow{margin-top:auto;font-size:20px;color:rgba(255,255,255,.2);transition:color .2s,transform .2s;align-self:flex-end}
+.profile-card:hover .card-arrow{color:var(--card-accent);transform:translateX(4px)}
+.admin-login-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:28px 24px;
+  position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;
+  --card-accent:var(--b300);
+}
+.admin-login-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--b300)}
+.admin-login-top{display:flex;align-items:flex-start;gap:12px}
+.admin-input{
+  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:7px;padding:9px 12px;font-size:13px;color:var(--white);outline:none;
+  transition:border-color .15s;
+}
+.admin-input::placeholder{color:rgba(255,255,255,.3)}
+.admin-input:focus{border-color:var(--b300)}
+.admin-login-err{font-size:11px;color:#FCA5A5;font-family:var(--ff-mono);display:none}
+.admin-login-err.show{display:block}
+.admin-btn-login{
+  width:100%;padding:10px;border-radius:7px;background:var(--b600);color:var(--white);
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .15s;font-weight:500;
+}
+.admin-btn-login:hover{background:var(--b500)}
+.login-footer{margin-top:32px;font-family:var(--ff-mono);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.1em;text-transform:uppercase;position:relative;z-index:1}
+
+/* ══ TOPBAR ══════════════════════════════════════ */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:var(--b900);position:sticky;top:0;z-index:100}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.topbar-logo{font-family:var(--ff-display);font-size:22px;letter-spacing:.06em;color:var(--white)}
+.topbar-logo span{color:var(--b400)}
+.topbar-badge{font-family:var(--ff-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);padding:3px 8px;border-radius:4px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-user{font-size:13px;color:rgba(255,255,255,.5)}
+.topbar-user strong{color:var(--b300)}
+/* live indicator */
+.topbar-live{display:flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.06em}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.btn-logout{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:5px;transition:all .15s}
+.btn-logout:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+
+/* ══ PO FORM ══════════════════════════════════════ */
+#screen-po{display:none}
+.po-wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+.form-hero{background:var(--b900);border-radius:12px;padding:32px 36px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;overflow:hidden;position:relative}
+.form-hero::before{content:'';position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(135deg,transparent 30%,rgba(59,130,212,.14));pointer-events:none}
+.form-hero-eyebrow{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--b300);margin-bottom:8px}
+.form-hero-title{font-family:var(--ff-display);font-size:38px;letter-spacing:.04em;color:var(--white);line-height:.95}
+.form-hero-title span{color:var(--b400)}
+.form-hero-sub{font-size:13px;color:rgba(255,255,255,.4);margin-top:8px}
+.form-hero-right{font-family:var(--ff-display);font-size:64px;color:rgba(255,255,255,.05);line-height:1;flex-shrink:0}
+.accent-line{height:3px;background:linear-gradient(90deg,var(--b800),var(--b500),var(--b300));border-radius:2px;margin-bottom:28px}
+.section-label{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.field-group{margin-bottom:28px}
+.field-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.field-required{color:var(--accent)}
+.form-input{width:100%;font-size:14px;font-weight:500;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;transition:border-color .15s,box-shadow .15s;outline:none}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,184,.1)}
+.form-input::placeholder{color:rgba(0,0,0,.2);font-weight:400}
+.form-textarea{min-height:88px;line-height:1.65}
+.nombre-input-big{font-family:var(--ff-display);font-size:28px;letter-spacing:.03em;padding:10px 14px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:640px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.kpi-selector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:640px){.kpi-selector-grid{grid-template-columns:1fr 1fr}}
+.kpi-chip{padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid var(--line);color:var(--mid);background:var(--white);transition:all .15s;cursor:pointer;text-align:left;line-height:1.3}
+.kpi-chip:hover{border-color:var(--accent);color:var(--accent)}
+.kpi-chip.on{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.kpi-chip-label{font-size:10px;opacity:.7;display:block;margin-top:2px;font-weight:400}
+.kpi-box{background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:14px;text-align:center;transition:border-color .15s}
+.kpi-box:focus-within{border-color:var(--accent)}
+.kpi-input-big{width:100%;font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;color:var(--accent);border:none;background:transparent;outline:none;text-align:center;padding:4px 0}
+.kpi-input-big::placeholder{color:rgba(37,99,184,.2);font-size:22px}
+.kpi-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.act-grid{grid-template-columns:1fr}}
+.act-card{background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:14px;position:relative;transition:border-color .15s}
+.act-card:focus-within{border-color:var(--accent)}
+.act-num{font-family:var(--ff-display);font-size:40px;color:rgba(0,0,0,.05);position:absolute;top:4px;right:10px;line-height:1;pointer-events:none;user-select:none}
+.pilares-wrap{display:flex;flex-wrap:wrap;gap:8px}
+.pilar-btn{padding:7px 16px;border-radius:100px;font-size:12px;font-weight:600;border:1.5px solid var(--line);color:var(--mid);background:var(--white);transition:all .15s;user-select:none}
+.pilar-btn:hover{border-color:var(--accent);color:var(--accent)}
+.pilar-btn.on{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.beneficio-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.beneficio-arrow{color:var(--accent);font-size:14px;font-weight:700;flex-shrink:0}
+.upload-zone{border:2px dashed var(--line);border-radius:10px;padding:28px;text-align:center;background:var(--white);transition:border-color .2s,background .2s;cursor:pointer;position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:var(--b50)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:32px;margin-bottom:8px}
+.upload-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.upload-sub{font-size:12px;color:var(--muted)}
+.upload-list{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.upload-item{display:flex;align-items:center;gap:10px;background:var(--b50);border:1px solid var(--b200);border-radius:7px;padding:9px 12px}
+.upload-item-icon{font-size:16px;flex-shrink:0}
+.upload-item-name{flex:1;font-size:12px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-item-size{font-size:11px;color:var(--muted);font-family:var(--ff-mono);flex-shrink:0}
+.upload-item-del{color:var(--muted);font-size:14px;padding:2px 4px;transition:color .15s;flex-shrink:0}
+.upload-item-del:hover{color:var(--danger)}
+.btn-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:10px;background:var(--b800);color:var(--white);font-family:var(--ff-display);font-size:20px;letter-spacing:.08em;transition:background .2s,transform .1s,opacity .2s;margin-top:32px;position:relative;overflow:hidden}
+.btn-submit:hover{background:var(--b600);transform:translateY(-1px)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ══ ADMIN ══════════════════════════════════════ */
+#screen-admin{display:none}
+.admin-wrap{max-width:1100px;margin:0 auto;padding:36px 24px 80px}
+.admin-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.admin-section-title{font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;color:var(--ink)}
+.admin-section-sub{font-size:13px;color:var(--muted);margin-top:2px}
+.filters-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.filter-search{flex:1;min-width:200px;max-width:320px;background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:9px 14px;font-size:13px;color:var(--ink);outline:none;transition:border-color .15s}
+.filter-search:focus{border-color:var(--accent)}
+.filter-select{background:var(--white);border:1.5px solid var(--line);border-radius:8px;padding:9px 14px;font-size:13px;color:var(--ink);outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7FA8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer;transition:border-color .15s}
+.filter-select:focus{border-color:var(--accent)}
+.filters-count{font-family:var(--ff-mono);font-size:11px;color:var(--muted);margin-left:auto}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.il-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,transform .15s;cursor:pointer}
+.il-card:hover{box-shadow:0 8px 32px rgba(13,27,42,.1);transform:translateY(-2px)}
+.il-card-top{padding:18px 20px 14px;border-bottom:1px solid var(--line);position:relative}
+.il-card-zona{font-family:var(--ff-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.il-card-name{font-family:var(--ff-display);font-size:20px;letter-spacing:.03em;color:var(--ink);line-height:1.1;margin-bottom:6px}
+.il-card-po{font-size:12px;color:var(--muted);font-weight:500}
+.kpi-badge{position:absolute;top:16px;right:16px;font-family:var(--ff-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:100px;background:var(--b100);color:var(--b700);font-weight:500;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.il-card-body{padding:14px 20px}
+.il-card-kpi{display:flex;align-items:baseline;gap:6px;margin-bottom:10px}
+.il-card-kpi-val{font-family:var(--ff-display);font-size:28px;letter-spacing:.04em;color:var(--accent)}
+.il-card-kpi-label{font-size:11px;color:var(--muted)}
+.il-card-meta{display:flex;gap:16px;flex-wrap:wrap}
+.il-meta-item{font-size:11px;color:var(--muted)}
+.il-meta-item strong{color:var(--ink);font-weight:600}
+.il-card-bottom{padding:12px 20px;background:var(--b50);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.il-card-pilares{display:flex;gap:4px;flex-wrap:wrap}
+.pilar-tag{font-size:9px;padding:3px 8px;border-radius:100px;background:var(--b100);color:var(--b700);font-weight:600;letter-spacing:.04em}
+.il-card-docs{font-family:var(--ff-mono);font-size:9px;color:var(--b600);display:flex;align-items:center;gap:4px}
+
+/* Loading skeleton */
+.skeleton-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.skel{background:linear-gradient(90deg,var(--b100) 25%,var(--b50) 50%,var(--b100) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:.4}
+.empty-title{font-size:18px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--muted);opacity:.7}
+
+/* ══ MODAL ══════════════════════════════════════ */
+#modal-overlay{position:fixed;inset:0;background:rgba(13,27,42,.6);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--white);border-radius:14px;width:100%;max-width:700px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:modalIn .2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(8px)}}
+.modal-header{background:var(--b900);padding:24px 28px;border-radius:14px 14px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:2}
+.modal-title{font-family:var(--ff-display);font-size:26px;letter-spacing:.04em;color:var(--white)}
+.modal-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+.modal-close{color:rgba(255,255,255,.4);font-size:20px;line-height:1;flex-shrink:0;margin-top:2px;padding:4px;border-radius:4px;transition:color .15s}
+.modal-close:hover{color:var(--white)}
+.modal-body{padding:24px 28px}
+.modal-accent{height:3px;background:linear-gradient(90deg,var(--b800),var(--b500),var(--b300))}
+.modal-section{margin-bottom:20px}
+.modal-section-title{font-family:var(--ff-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.modal-field{margin-bottom:10px}
+.modal-field-label{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:3px}
+.modal-field-value{font-size:14px;color:var(--ink);line-height:1.6}
+.modal-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.modal-kpi{background:var(--b50);border-radius:8px;padding:12px;text-align:center}
+.modal-kpi-val{font-family:var(--ff-display);font-size:26px;color:var(--accent);letter-spacing:.04em}
+.modal-kpi-label{font-size:10px;color:var(--muted);margin-top:2px}
+.modal-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:500px){.modal-grid-2{grid-template-columns:1fr}}
+.modal-doc-list{display:flex;flex-direction:column;gap:8px}
+.modal-doc-item{display:flex;align-items:center;gap:10px;background:var(--b50);border:1px solid var(--b200);border-radius:8px;padding:10px 14px;text-decoration:none;transition:background .15s}
+.modal-doc-item:hover{background:var(--b100)}
+.modal-doc-icon{font-size:20px;flex-shrink:0}
+.modal-doc-name{flex:1;font-size:13px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.modal-doc-size{font-family:var(--ff-mono);font-size:10px;color:var(--muted)}
+.modal-doc-dl{font-size:14px;color:var(--accent)}
+.modal-footer{padding:16px 28px 24px;display:flex;justify-content:flex-end;gap:10px}
+.btn-sm{padding:9px 20px;border-radius:7px;font-size:13px;font-weight:600;border:1.5px solid var(--line);color:var(--mid);transition:all .15s}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm.danger{border-color:rgba(185,28,28,.3);color:var(--danger)}
+.btn-sm.danger:hover{background:var(--danger);color:var(--white);border-color:var(--danger)}
+.btn-sm:disabled{opacity:.4;cursor:not-allowed}
+
+/* ══ TOAST ══════════════════════════════════════ */
+#toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--success);color:var(--white);padding:14px 28px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0)}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ══ FIREBASE CONFIG ══════════════════════════ -->
+<div id="fb-config-screen">
+  <div class="fb-config-box">
+    <div class="fb-config-title">🦈 SHARK <span>TANK</span></div>
+    <div class="fb-config-sub">Para usar la app con base de datos compartida, ingresa tu configuración de Firebase. Solo se hace una vez — queda guardada en este navegador.</div>
+
+    <div class="fb-step">
+      <div class="fb-step-num">Paso 1 · Crear proyecto</div>
+      <div class="fb-step-text">Ve a <code>console.firebase.google.com</code> → Crear proyecto → nombre: <code>shark-tank-ver</code></div>
+    </div>
+    <div class="fb-step">
+      <div class="fb-step-num">Paso 2 · Habilitar Firestore</div>
+      <div class="fb-step-text">Build → Firestore Database → Crear → modo producción → elige región <code>us-central</code></div>
+    </div>
+    <div class="fb-step">
+      <div class="fb-step-num">Paso 3 · Reglas de acceso</div>
+      <div class="fb-step-text">Firestore → Reglas → pega: <code>allow read, write: if true;</code> → Publicar</div>
+    </div>
+    <div class="fb-step">
+      <div class="fb-step-num">Paso 4 · Obtener credenciales</div>
+      <div class="fb-step-text">Project Settings → General → Your apps → Web app (&lt;/&gt;) → registra la app → copia los valores del objeto <code>firebaseConfig</code></div>
+    </div>
+
+    <div class="fb-divider"></div>
+    <label class="fb-field-label">API Key</label>
+    <input class="fb-input" id="cfg-apiKey" placeholder="AIzaSy...">
+    <label class="fb-field-label">Auth Domain</label>
+    <input class="fb-input" id="cfg-authDomain" placeholder="tu-proyecto.firebaseapp.com">
+    <label class="fb-field-label">Project ID</label>
+    <input class="fb-input" id="cfg-projectId" placeholder="tu-proyecto">
+    <div class="fb-err" id="fb-err">Verifica los datos — no se pudo conectar a Firebase</div>
+    <button class="fb-btn" onclick="saveFbConfig()">Conectar y continuar →</button>
+    <div class="fb-note">Los datos de configuración se guardan en localStorage de este navegador.<br>No se comparten ni se envían a ningún servidor externo.</div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══════════════════════════════════ -->
+<div id="screen-login" class="hidden">
+  <div class="login-brand">
+    <div class="login-shark">🦈</div>
+    <div class="login-title">SHARK<br><span>TANK</span></div>
+    <div class="login-sub">Agile Hub · Región Veracruz · 2026</div>
+  </div>
+  <div class="login-cards">
+    <button class="profile-card po" onclick="login('po')">
+      <div class="card-icon">📝</div>
+      <div class="card-role">Product Owner</div>
+      <div class="card-title">Registrar iniciativa</div>
+      <div class="card-desc">Documenta tu One Page y envía tu Iniciativa Local al panel de evaluación.</div>
+      <div class="card-arrow">→</div>
+    </button>
+    <div class="admin-login-card">
+      <div class="admin-login-top">
+        <div class="card-icon" style="background:var(--b400);flex-shrink:0">📊</div>
+        <div>
+          <div class="card-role" style="color:var(--b300)">Administrador · CD</div>
+          <div class="card-title">Panel de control</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <input class="admin-input" id="admin-user" type="text" placeholder="Usuario" autocomplete="username">
+        <input class="admin-input" id="admin-pass" type="password" placeholder="Contraseña" autocomplete="current-password" onkeydown="if(event.key==='Enter')adminLogin()">
+        <div class="admin-login-err" id="admin-err">Usuario o contraseña incorrectos</div>
+        <button class="admin-btn-login" onclick="adminLogin()">Ingresar →</button>
+      </div>
+    </div>
+  </div>
+  <div class="login-footer">Connecting Teams · Driving Agility</div>
+</div>
+
+<!-- ══ TOPBAR ══════════════════════════════════ -->
+<nav class="topbar hidden" id="topbar">
+  <div class="topbar-brand">
+    <span class="topbar-logo">SHARK <span>TANK</span></span>
+    <span class="topbar-badge">VER · 2026</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-live"><div class="live-dot"></div>EN VIVO</div>
+    <span class="topbar-user" id="topbar-user"></span>
+    <button class="btn-logout" onclick="logout()">Salir</button>
+  </div>
+</nav>
+
+<!-- ══ PO FORM ══════════════════════════════════ -->
+<div id="screen-po">
+  <div class="po-wrap">
+    <div class="form-hero">
+      <div class="form-hero-left">
+        <div class="form-hero-eyebrow">One Page · Iniciativa Local</div>
+        <div class="form-hero-title">REGISTRA<br>TU <span>IDEA</span></div>
+        <div class="form-hero-sub">Completa todos los campos y envía tu iniciativa al panel</div>
+      </div>
+      <div class="form-hero-right">IL</div>
+    </div>
+    <div class="accent-line"></div>
+    <form id="il-form" onsubmit="submitForm(event)" novalidate>
+      <div class="field-group">
+        <div class="section-label">Nombre de la iniciativa</div>
+        <input class="form-input nombre-input-big" id="field-nombre" type="text" name="nombre" placeholder="Nombre de tu Iniciativa Local..." maxlength="80" required>
+        <span class="field-error-msg">⚠ Escribe el nombre de la iniciativa</span>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Datos del proyecto</div>
+        <div class="grid-3">
+          <div><label class="field-label">Product Owner <span class="field-required">*</span></label><input class="form-input" id="field-po" type="text" name="po" placeholder="Tu nombre" required>
+        <span class="field-error-msg">⚠ Ingresa el nombre del Product Owner</span></div>
+          <div><label class="field-label">Región / Plaza <span class="field-required">*</span></label><input class="form-input" id="field-zona" type="text" name="zona" placeholder="Ej. Xalapa Norte" required>
+        <span class="field-error-msg">⚠ Indica la Región / Plaza</span></div>
+          <div><label class="field-label">Duración estimada</label><input class="form-input" type="text" name="duracion" placeholder="Ej. 8 semanas"></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Indicador clave de la iniciativa</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Selecciona el KPI principal que impactará tu iniciativa</p>
+        <div class="kpi-selector-grid" id="kpi-chips">
+          <button type="button" class="kpi-chip" data-kpi="Tráfico" onclick="toggleKpi(this)">🚶 Tráfico<span class="kpi-chip-label">Visitas / afluencia</span></button>
+          <button type="button" class="kpi-chip" data-kpi="Venta TMCB" onclick="toggleKpi(this)">💰 Venta TMCB<span class="kpi-chip-label">Total Mercancía Cobrada</span></button>
+          <button type="button" class="kpi-chip" data-kpi="UAFIR Total" onclick="toggleKpi(this)">📊 UAFIR Total<span class="kpi-chip-label">Utilidad antes de IR</span></button>
+          <button type="button" class="kpi-chip" data-kpi="NPS CX" onclick="toggleKpi(this)">⭐ NPS CX<span class="kpi-chip-label">Experiencia del cliente</span></button>
+          <button type="button" class="kpi-chip" data-kpi="NPS EX" onclick="toggleKpi(this)">🤝 NPS EX<span class="kpi-chip-label">Experiencia del colaborador</span></button>
+          <button type="button" class="kpi-chip" data-kpi="Usuarios Digitales Activos" onclick="toggleKpi(this)">📱 Usuarios Digitales Activos<span class="kpi-chip-label">Activación digital</span></button>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Métricas e indicadores</div>
+        <div class="grid-4">
+          <div class="kpi-box"><label class="field-label">Meta del KPI <span class="field-required">*</span></label><input class="kpi-input-big" type="text" id="field-kpi_principal" name="kpi_principal" placeholder="+X%" required>
+        <span class="field-error-msg">⚠ Ingresa la meta del KPI principal</span><div class="kpi-sub" id="kpi-sub-label">Selecciona KPI arriba</div></div>
+          <div class="kpi-box"><label class="field-label">Tiendas piloto</label><input class="kpi-input-big" type="text" name="kpi_tiendas" placeholder="00"><div class="kpi-sub">Unidades en prueba</div></div>
+          <div class="kpi-box"><label class="field-label">Plazo de prueba</label><input class="kpi-input-big" type="text" name="kpi_plazo" placeholder="00d"><div class="kpi-sub">Días / semanas</div></div>
+          <div class="kpi-box"><label class="field-label">Meta financiera</label><input class="kpi-input-big" type="text" name="kpi_meta" placeholder="$—"><div class="kpi-sub">Ticket / transacción</div></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Problema y solución</div>
+        <div class="grid-2">
+          <div><label class="field-label">Problema que resuelve <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-problema" name="problema" placeholder="¿Qué situación detectaste en tu plaza? Sé específico..." required></textarea>
+            <span class="field-error-msg">⚠ Describe el problema que resuelve</span></div>
+          <div><label class="field-label">Solución propuesta <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-solucion" name="solucion" placeholder="¿Cómo resuelves el problema? Simple y accionable..." required></textarea>
+            <span class="field-error-msg">⚠ Describe la solución propuesta</span></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="grid-2">
+          <div><label class="field-label">Objetivo <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-objetivo" name="objetivo" placeholder="¿Qué quieres lograr? Incrementar, reducir, lograr..." required></textarea>
+            <span class="field-error-msg">⚠ Define el objetivo de la iniciativa</span></div>
+          <div><label class="field-label">Alcance <span class="field-required">*</span></label><textarea class="form-input form-textarea" id="field-alcance" name="alcance" placeholder="¿Cuántas tiendas? ¿Qué zonas? ¿Qué categorías?" required></textarea>
+            <span class="field-error-msg">⚠ Define el alcance de la iniciativa</span></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Actividades clave</div>
+        <div class="act-grid">
+          <div class="act-card"><div class="act-num">1</div><label class="field-label">Actividad 1</label><textarea class="form-input form-textarea" name="act1" placeholder="Primera actividad o hito crítico..."></textarea></div>
+          <div class="act-card"><div class="act-num">2</div><label class="field-label">Actividad 2</label><textarea class="form-input form-textarea" name="act2" placeholder="Segunda actividad o hito crítico..."></textarea></div>
+          <div class="act-card"><div class="act-num">3</div><label class="field-label">Actividad 3</label><textarea class="form-input form-textarea" name="act3" placeholder="Tercera actividad o hito crítico..."></textarea></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Inversión y beneficios</div>
+        <div class="grid-2">
+          <div><label class="field-label">Inversión estimada (MXN)</label><input class="form-input" type="text" name="inversion" placeholder="$0.00"><p style="font-size:11px;color:var(--muted);margin-top:5px">Costo total del piloto</p></div>
+          <div><label class="field-label">Beneficios esperados</label>
+            <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben1" placeholder="Beneficio esperado 1"></div>
+            <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben2" placeholder="Beneficio esperado 2"></div>
+            <div class="beneficio-row"><span class="beneficio-arrow">→</span><input class="form-input" type="text" name="ben3" placeholder="Beneficio esperado 3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Alineación con Framework Operaciones 2026</div>
+        <div class="pilares-wrap">
+          <button type="button" class="pilar-btn" data-p="Expansión rentable" onclick="togglePilar(this)">Expansión rentable</button>
+          <button type="button" class="pilar-btn" data-p="Transacciones digitales" onclick="togglePilar(this)">Transacciones digitales</button>
+          <button type="button" class="pilar-btn" data-p="Nuestra Gente" onclick="togglePilar(this)">Nuestra Gente</button>
+          <button type="button" class="pilar-btn" data-p="Propuesta de valor" onclick="togglePilar(this)">Propuesta de valor</button>
+          <button type="button" class="pilar-btn" data-p="Servicio a tiendas" onclick="togglePilar(this)">Servicio a tiendas</button>
+          <button type="button" class="pilar-btn" data-p="Fidelización Spin" onclick="togglePilar(this)">Fidelización Spin</button>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Documentos de soporte</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Adjunta evidencias, análisis o materiales de apoyo · Máx. 1 MB por archivo (se almacenan en Firestore)</p>
+        <div class="upload-zone" id="upload-zone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.gif,.zip" onchange="handleFiles(this.files)">
+          <div class="upload-icon">📎</div>
+          <div class="upload-title">Arrastra archivos aquí o haz clic para seleccionar</div>
+          <div class="upload-sub">PDF, Word, Excel, PowerPoint, imágenes · Máx. 1 MB por archivo</div>
+        </div>
+        <div class="upload-list" id="upload-list"></div>
+      </div>
+      <div class="field-group">
+        <div class="section-label">Confirmación</div>
+        <div class="grid-2">
+          <div><label class="field-label">Nombre del PO <span class="field-required">*</span></label><input class="form-input" id="field-firma_po" type="text" name="firma_po" placeholder="Nombre completo" required>
+        <span class="field-error-msg">⚠ Ingresa el nombre completo del PO</span></div>
+          <div><label class="field-label">Fecha de entrega</label><input class="form-input" type="date" name="fecha" id="fecha-input"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit" id="btn-submit">🦈 &nbsp; ENVIAR INICIATIVA AL PANEL</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══ ADMIN ══════════════════════════════════ -->
+<div id="screen-admin">
+  <div class="admin-wrap">
+    <div class="admin-section-head">
+      <div>
+        <div class="admin-section-title">Iniciativas registradas</div>
+        <div class="admin-section-sub">Datos en tiempo real · Haz clic en una tarjeta para ver el detalle completo y descargar documentos</div>
+      </div>
+    </div>
+    <div class="filters-bar">
+      <input class="filter-search" type="search" id="filter-search" placeholder="🔍  Buscar por nombre, PO o zona..." oninput="renderCards()">
+      <select class="filter-select" id="filter-kpi" onchange="renderCards()">
+        <option value="">Todos los KPIs</option>
+        <option>Tráfico</option><option>Venta TMCB</option><option>UAFIR Total</option>
+        <option>NPS CX</option><option>NPS EX</option><option>Usuarios Digitales Activos</option>
+      </select>
+      <select class="filter-select" id="filter-zona" onchange="renderCards()">
+        <option value="">Todas las zonas</option>
+      </select>
+      <span class="filters-count" id="filters-count"></span>
+    </div>
+    <div class="cards-grid" id="cards-grid">
+      <!-- Skeletons iniciales -->
+      <div class="skeleton-card" style="padding:18px 20px">
+        <div class="skel" style="height:10px;width:60%;margin-bottom:10px"></div>
+        <div class="skel" style="height:20px;width:85%;margin-bottom:8px"></div>
+        <div class="skel" style="height:10px;width:40%"></div>
+      </div>
+      <div class="skeleton-card" style="padding:18px 20px">
+        <div class="skel" style="height:10px;width:55%;margin-bottom:10px"></div>
+        <div class="skel" style="height:20px;width:90%;margin-bottom:8px"></div>
+        <div class="skel" style="height:10px;width:45%"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ SUCCESS SCREEN ══════════════════════════ -->
+<div id="screen-success">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <div class="success-tag">Agile Hub · Región Veracruz · 2026</div>
+    <div class="success-title">¡REGISTRO<br><span>EXITOSO!</span></div>
+    <div class="success-folio-box">
+      <div class="success-folio-label">Tu número de folio</div>
+      <div class="success-folio-num" id="success-folio">VER_001</div>
+    </div>
+    <div class="success-desc">
+      Tu iniciativa ha sido enviada al panel de evaluación Shark Tank.<br>
+      <strong>Guarda tu número de folio</strong> — lo necesitarás para dar seguimiento a tu iniciativa en el proceso de evaluación.
+    </div>
+    <button class="success-btn" onclick="resetToLogin()">← Registrar otra iniciativa</button>
+  </div>
+</div>
+
+<!-- ══ MODAL ══════════════════════════════════ -->
+<div id="modal-overlay" class="hidden" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title" id="modal-title"></div><div class="modal-sub" id="modal-sub"></div></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-accent"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn-sm danger" id="btn-delete" onclick="deleteFromModal()">🗑 Eliminar</button>
+      <button class="btn-sm" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ══ FIREBASE SDK ══════════════════════════════ -->
+<script type="module">
+import { initializeApp, getApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, addDoc, deleteDoc, doc,
+         onSnapshot, query, orderBy, serverTimestamp, getDocs }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+/* ── CONFIG ── */
+const CFG_KEY = 'st_fb_cfg_v1';
+
+function loadCfg(){
+  try{ return JSON.parse(localStorage.getItem(CFG_KEY)||'null') }catch{ return null }
+}
+function saveCfg(c){ localStorage.setItem(CFG_KEY, JSON.stringify(c)) }
+
+/* ── Globals exposed to inline handlers ── */
+let db = null;
+let ilsCache = [];
+let unsubscribe = null;
+let modalId = null;
+let selectedKpi = '';
+let uploadedFiles = [];
+
+window._app = {
+  getDb(){ return db },
+  getIls(){ return ilsCache },
+  getModalId(){ return null },
+  setModalId(v){ modalId = v },
+  getSelectedKpi(){ return selectedKpi },
+  setSelectedKpi(v){ selectedKpi = v },
+  getFiles(){ return uploadedFiles },
+  setFiles(v){ uploadedFiles = v },
+};
+
+/* ── Config screen ── */
+window.saveFbConfig = async function(){
+  const apiKey     = document.getElementById('cfg-apiKey').value.trim();
+  const authDomain = document.getElementById('cfg-authDomain').value.trim();
+  const projectId  = document.getElementById('cfg-projectId').value.trim();
+  const err        = document.getElementById('fb-err');
+  if(!apiKey||!authDomain||!projectId){ err.textContent='Completa los tres campos.'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+  const cfg = { apiKey, authDomain, projectId, storageBucket:`${projectId}.appspot.com`, messagingSenderId:'', appId:'' };
+  try {
+    const app = initializeApp(cfg, 'shark-tank');
+    const testDb = getFirestore(app);
+    // Quick connectivity test — just initialize collection reference
+    collection(testDb,'shark_ils_2026');
+    saveCfg(cfg);
+    db = testDb;
+    startApp();
+  } catch(e){
+    err.textContent = 'Error al conectar: ' + e.message;
+    err.classList.add('show');
+  }
+};
+
+/* ── Boot — credenciales fijas, sin pantalla de configuración ── */
+function boot(){
+  const cfg = {
+    apiKey:            'AIzaSyDq4CcG60i9jrnS1sY3ebYfQjGoa9APNbw',
+    authDomain:        'shark-tank-ver.firebaseapp.com',
+    projectId:         'shark-tank-ver',
+    storageBucket:     'shark-tank-ver.appspot.com',
+    messagingSenderId: '520564157172',
+    appId:             '1:520564157172:web:afdaa2c0e089a6d5f88ca1'
+  };
+  try{
+    const app = initializeApp(cfg,'shark-tank');
+    db = getFirestore(app);
+  } catch(e){
+    if(e.code==='app/duplicate-app'){
+      try{ db = getFirestore(getApp('shark-tank')); }
+      catch(e2){ console.error('Firebase re-init error',e2); return; }
+    } else { console.error('Firebase init error',e); return; }
+  }
+  startApp();
+}
+
+function showConfigScreen(){
+  document.getElementById('fb-config-screen').style.display='flex';
+}
+
+function startApp(){
+  document.getElementById('fb-config-screen').style.display='none';
+  document.getElementById('screen-login').classList.remove('hidden');
+}
+
+/* ── Auth ── */
+window.login = function(role){
+  document.getElementById('screen-login').classList.add('hidden');
+  document.getElementById('topbar').classList.remove('hidden');
+  document.getElementById('topbar-user').innerHTML =
+    role==='po'
+      ? '<strong>Product Owner</strong> · Registro de Iniciativas'
+      : '<strong>Administrador CD</strong> · Panel de Control';
+  if(role==='po'){
+    document.getElementById('screen-po').style.display='block';
+    document.getElementById('fecha-input').value = new Date().toISOString().split('T')[0];
+  } else {
+    document.getElementById('screen-admin').style.display='block';
+    startListener();
+  }
+};
+
+window.adminLogin = function(){
+  const u = document.getElementById('admin-user').value.trim();
+  const p = document.getElementById('admin-pass').value;
+  const err = document.getElementById('admin-err');
+  if(u==='CD_2026' && p==='SharkTank2026'){
+    err.classList.remove('show');
+    window.login('admin');
+  } else {
+    err.classList.add('show');
+    document.getElementById('admin-pass').value='';
+    document.getElementById('admin-pass').focus();
+  }
+};
+
+window.logout = function(){
+  if(unsubscribe){ unsubscribe(); unsubscribe=null; }
+  ilsCache=[];
+  document.getElementById('screen-login').classList.remove('hidden');
+  document.getElementById('topbar').classList.add('hidden');
+  document.getElementById('screen-po').style.display='none';
+  document.getElementById('screen-admin').style.display='none';
+  document.getElementById('screen-success').style.display='none';
+  document.getElementById('il-form').reset();
+  document.querySelectorAll('.pilar-btn.on,.kpi-chip.on').forEach(b=>b.classList.remove('on'));
+  selectedKpi=''; uploadedFiles=[];
+  document.getElementById('upload-list').innerHTML='';
+  document.getElementById('admin-user').value='';
+  document.getElementById('admin-pass').value='';
+  document.getElementById('admin-err').classList.remove('show');
+  document.getElementById('kpi-sub-label').textContent='Selecciona KPI arriba';
+};
+
+/* ── Firestore listener (realtime) ── */
+function startListener(){
+  const q = query(collection(db,'shark_ils_2026'), orderBy('ts','desc'));
+  unsubscribe = onSnapshot(q, snap => {
+    ilsCache = snap.docs.map(d=>({id:d.id,...d.data()}));
+    populateZonaFilter();
+    renderCards();
+  }, err => {
+    showToast('⚠️  Error de conexión: ' + err.message, '#B91C1C');
+  });
+}
+
+/* ── KPI chips ── */
+window.toggleKpi = function(el){
+  document.querySelectorAll('.kpi-chip.on').forEach(b=>b.classList.remove('on'));
+  if(el.dataset.kpi !== selectedKpi){
+    el.classList.add('on'); selectedKpi=el.dataset.kpi;
+    document.getElementById('kpi-sub-label').textContent=selectedKpi;
+  } else {
+    selectedKpi='';
+    document.getElementById('kpi-sub-label').textContent='Selecciona KPI arriba';
+  }
+};
+
+/* ── Pilares ── */
+window.togglePilar = function(el){ el.classList.toggle('on') };
+function getSelectedPilares(){ return [...document.querySelectorAll('.pilar-btn.on')].map(b=>b.dataset.p) }
+
+/* ── File upload ── */
+window.fileIcon = function(type){
+  if(!type) return '📎';
+  if(type.includes('pdf')) return '📄';
+  if(type.includes('word')||type.includes('doc')) return '📝';
+  if(type.includes('sheet')||type.includes('excel')||type.includes('xls')) return '📊';
+  if(type.includes('presentation')||type.includes('powerpoint')||type.includes('ppt')) return '📑';
+  if(type.includes('image')) return '🖼️';
+  return '📎';
+};
+function fmtSize(b){ return b<1024*1024?(b/1024).toFixed(1)+' KB':(b/1024/1024).toFixed(1)+' MB' }
+
+window.handleDrop = function(e){
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag');
+  handleFiles(e.dataTransfer.files);
+};
+
+window.handleFiles = function(files){
+  Array.from(files).forEach(f=>{
+    if(f.size > 1*1024*1024){ showToast('⚠️  '+f.name+' supera 1 MB — límite de Firestore','#B91C1C'); return; }
+    if(uploadedFiles.find(x=>x.name===f.name)) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      uploadedFiles.push({name:f.name,size:f.size,type:f.type,dataUrl:ev.target.result});
+      renderUploadList();
+    };
+    reader.readAsDataURL(f);
+  });
+};
+
+function renderUploadList(){
+  document.getElementById('upload-list').innerHTML = uploadedFiles.map((f,i)=>`
+    <div class="upload-item">
+      <span class="upload-item-icon">${fileIcon(f.type)}</span>
+      <span class="upload-item-name">${esc(f.name)}</span>
+      <span class="upload-item-size">${fmtSize(f.size)}</span>
+      <button type="button" class="upload-item-del" onclick="removeFile(${i})">✕</button>
+    </div>`).join('');
+}
+window.removeFile = function(i){ uploadedFiles.splice(i,1); renderUploadList() };
+
+/* ── Folio generator ── */
+async function getNextFolio(){
+  const snap = await getDocs(collection(db,'shark_ils_2026'));
+  const n = snap.size + 1;
+  return 'VER_' + String(n).padStart(3,'0');
+}
+
+/* ── Field validation with scroll & highlight ── */
+function validateForm(d){
+  const required = [
+    { key:'nombre',     id:'field-nombre',    label:'Nombre de la iniciativa' },
+    { key:'po',         id:'field-po',        label:'Product Owner' },
+    { key:'zona',       id:'field-zona',      label:'Región / Plaza' },
+    { key:'problema',   id:'field-problema',  label:'Problema que resuelve' },
+    { key:'solucion',   id:'field-solucion',  label:'Solución propuesta' },
+    { key:'objetivo',   id:'field-objetivo',  label:'Objetivo' },
+    { key:'alcance',    id:'field-alcance',   label:'Alcance' },
+    { key:'kpi_principal', id:'field-kpi_principal', label:'Meta del KPI' },
+    { key:'firma_po',   id:'field-firma_po',  label:'Nombre del PO (confirmación)' },
+  ];
+  // Clear previous errors
+  document.querySelectorAll('.field-error').forEach(el=>el.classList.remove('field-error'));
+  document.querySelectorAll('.field-error-msg').forEach(el=>el.classList.remove('show'));
+  let firstError = null;
+  for(const r of required){
+    if(!d[r.key]||!d[r.key].trim()){
+      const el = document.getElementById(r.id);
+      if(el){
+        el.classList.add('field-error');
+        const msg = el.parentElement.querySelector('.field-error-msg');
+        if(msg) msg.classList.add('show');
+        if(!firstError) firstError = el;
+      }
+    }
+  }
+  if(firstError){
+    firstError.scrollIntoView({behavior:'smooth', block:'center'});
+    firstError.focus();
+    return false;
+  }
+  return true;
+}
+
+/* ── Submit ── */
+window.submitForm = async function(e){
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const d = Object.fromEntries(f.entries());
+  if(!validateForm(d)) return;
+  const btn = document.getElementById('btn-submit');
+  btn.disabled=true; btn.innerHTML='⏳ &nbsp; Enviando...';
+  try {
+    const folio = await getNextFolio();
+    await addDoc(collection(db,'shark_ils_2026'),{
+      folio,
+      nombre:d.nombre, po:d.po, zona:d.zona, duracion:d.duracion||'',
+      kpi_tipo:selectedKpi,
+      kpi_principal:d.kpi_principal, kpi_tiendas:d.kpi_tiendas||'',
+      kpi_plazo:d.kpi_plazo||'', kpi_meta:d.kpi_meta||'',
+      problema:d.problema, solucion:d.solucion,
+      objetivo:d.objetivo, alcance:d.alcance,
+      act1:d.act1||'', act2:d.act2||'', act3:d.act3||'',
+      inversion:d.inversion||'',
+      ben1:d.ben1||'', ben2:d.ben2||'', ben3:d.ben3||'',
+      pilares:getSelectedPilares(),
+      firma_po:d.firma_po,
+      fecha:d.fecha||new Date().toISOString().split('T')[0],
+      registrado:new Date().toLocaleString('es-MX'),
+      docs:uploadedFiles.map(f=>({name:f.name,size:f.size,type:f.type,dataUrl:f.dataUrl})),
+      ts:serverTimestamp()
+    });
+    // Reset form state
+    e.target.reset();
+    document.querySelectorAll('.pilar-btn.on,.kpi-chip.on').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.field-error').forEach(el=>el.classList.remove('field-error'));
+    selectedKpi=''; uploadedFiles=[];
+    document.getElementById('upload-list').innerHTML='';
+    document.getElementById('kpi-sub-label').textContent='Selecciona KPI arriba';
+    document.getElementById('fecha-input').value=new Date().toISOString().split('T')[0];
+    // Show success screen
+    document.getElementById('screen-po').style.display='none';
+    document.getElementById('topbar').classList.add('hidden');
+    document.getElementById('success-folio').textContent = folio;
+    document.getElementById('screen-success').style.display='flex';
+    window.scrollTo({top:0,behavior:'smooth'});
+  } catch(err){
+    showToast('❌  Error al guardar: '+err.message,'#B91C1C');
+    btn.disabled=false; btn.innerHTML='🦈 &nbsp; ENVIAR INICIATIVA AL PANEL';
+  }
+};
+
+/* ── Reset to login after success ── */
+window.resetToLogin = function(){
+  document.getElementById('screen-success').style.display='none';
+  document.getElementById('topbar').classList.remove('hidden');
+  document.getElementById('screen-po').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+/* ── Zona filter ── */
+function populateZonaFilter(){
+  const zonas=[...new Set(ilsCache.map(i=>i.zona).filter(Boolean))].sort();
+  const sel=document.getElementById('filter-zona');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Todas las zonas</option>';
+  zonas.forEach(z=>{const o=document.createElement('option');o.value=z;o.textContent=z;if(z===cur)o.selected=true;sel.appendChild(o)});
+}
+
+/* ── Render cards ── */
+window.renderCards = function(){
+  const q=(document.getElementById('filter-search').value||'').toLowerCase();
+  const fk=document.getElementById('filter-kpi').value;
+  const fz=document.getElementById('filter-zona').value;
+  let ils=ilsCache;
+  if(q)  ils=ils.filter(i=>(i.nombre+i.po+i.zona).toLowerCase().includes(q));
+  if(fk) ils=ils.filter(i=>i.kpi_tipo===fk);
+  if(fz) ils=ils.filter(i=>i.zona===fz);
+  document.getElementById('filters-count').textContent=ils.length===1?'1 iniciativa':`${ils.length} iniciativas`;
+  const grid=document.getElementById('cards-grid');
+  if(!ils.length){
+    grid.innerHTML=`<div class="empty-state"><div class="empty-icon">🦈</div><div class="empty-title">Sin iniciativas</div><div class="empty-sub">No hay registros que coincidan con los filtros</div></div>`;
+    return;
+  }
+  grid.innerHTML=ils.map(il=>{
+    const pils=(il.pilares||[]).slice(0,3).map(p=>`<span class="pilar-tag">${esc(p)}</span>`).join('');
+    const hasDocs=(il.docs||[]).length>0;
+    return `<div class="il-card" onclick="openModal('${il.id}')">
+      <div class="il-card-top">
+        ${il.kpi_tipo?`<div class="kpi-badge">${esc(il.kpi_tipo)}</div>`:''}
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          ${il.folio?`<span style="font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--b700);background:var(--b100);padding:3px 10px;border-radius:100px;letter-spacing:.06em">${esc(il.folio)}</span>`:''}
+          <div class="il-card-zona" style="margin-bottom:0">${esc(il.zona||'—')}</div>
+        </div>
+        <div class="il-card-name">${esc(il.nombre)}</div>
+        <div class="il-card-po">${esc(il.po)}</div>
+      </div>
+      <div class="il-card-body">
+        <div class="il-card-kpi"><div class="il-card-kpi-val">${esc(il.kpi_principal||'—')}</div><div class="il-card-kpi-label">Meta del KPI</div></div>
+        <div class="il-card-meta">
+          ${il.kpi_tiendas?`<div class="il-meta-item"><strong>${esc(il.kpi_tiendas)}</strong> tiendas</div>`:''}
+          ${il.kpi_plazo?`<div class="il-meta-item"><strong>${esc(il.kpi_plazo)}</strong> plazo</div>`:''}
+          ${il.inversion?`<div class="il-meta-item"><strong>${esc(il.inversion)}</strong> inversión</div>`:''}
+        </div>
+      </div>
+      <div class="il-card-bottom">
+        <div class="il-card-pilares">${pils}</div>
+        ${hasDocs
+          ? `<div class="il-card-docs">📎 ${(il.docs||[]).length} doc${(il.docs||[]).length>1?'s':''}</div>`
+          : `<span style="font-family:var(--ff-mono);font-size:9px;color:var(--muted)">${il.fecha||''}</span>`}
+      </div>
+    </div>`;
+  }).join('');
+};
+
+/* ── Modal ── */
+window.openModal = function(id){
+  const il=ilsCache.find(i=>i.id===id); if(!il) return;
+  modalId=id;
+  document.getElementById('modal-title').textContent=il.nombre;
+  document.getElementById('modal-sub').textContent=`${il.folio?il.folio+' · ':''}${il.po} · ${il.zona}${il.kpi_tipo?' · '+il.kpi_tipo:''}`;
+  const pils=(il.pilares||[]).map(p=>`<span class="pilar-tag">${esc(p)}</span>`).join(' ');
+  const bens=[il.ben1,il.ben2,il.ben3].filter(Boolean).map(b=>`<div style="display:flex;gap:8px;margin-bottom:5px"><span style="color:var(--accent);font-weight:700">→</span><span style="font-size:13px">${esc(b)}</span></div>`).join('');
+  const acts=[[il.act1,'1'],[il.act2,'2'],[il.act3,'3']].filter(a=>a[0]).map(a=>`<div style="background:var(--b50);border-radius:8px;padding:12px;position:relative"><div style="font-family:var(--ff-display);font-size:28px;color:rgba(0,0,0,.05);position:absolute;top:2px;right:8px;line-height:1">${a[1]}</div><div style="font-size:13px;line-height:1.6">${esc(a[0])}</div></div>`).join('');
+  const docs=il.docs||[];
+  const docsHtml=docs.length
+    ?`<div class="modal-section"><div class="modal-section-title">📎 Documentos adjuntos (${docs.length})</div><div class="modal-doc-list">${docs.map(doc=>`<a class="modal-doc-item" href="${doc.dataUrl}" download="${esc(doc.name)}" onclick="event.stopPropagation()"><span class="modal-doc-icon">${fileIcon(doc.type)}</span><span class="modal-doc-name">${esc(doc.name)}</span><span class="modal-doc-size">${fmtSize(doc.size)}</span><span class="modal-doc-dl">⬇</span></a>`).join('')}</div></div>`
+    :`<div class="modal-section"><div class="modal-section-title">📎 Documentos adjuntos</div><div style="font-size:13px;color:var(--muted);padding:8px 0">Sin documentos adjuntos</div></div>`;
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-section"><div class="modal-section-title">KPIs e indicadores</div>
+      <div class="modal-kpi-row">
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_principal||'—')}</div><div class="modal-kpi-label">${esc(il.kpi_tipo||'KPI')}</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_tiendas||'—')}</div><div class="modal-kpi-label">Tiendas piloto</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_plazo||'—')}</div><div class="modal-kpi-label">Plazo</div></div>
+        <div class="modal-kpi"><div class="modal-kpi-val">${esc(il.kpi_meta||'—')}</div><div class="modal-kpi-label">Meta financiera</div></div>
+      </div>
+    </div>
+    <div class="modal-section"><div class="modal-section-title">Problema y solución</div>
+      <div class="modal-grid-2">
+        <div class="modal-field"><div class="modal-field-label">Problema detectado</div><div class="modal-field-value">${esc(il.problema||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Solución propuesta</div><div class="modal-field-value">${esc(il.solucion||'—')}</div></div>
+      </div>
+    </div>
+    <div class="modal-section"><div class="modal-section-title">Objetivo y alcance</div>
+      <div class="modal-grid-2">
+        <div class="modal-field"><div class="modal-field-label">Objetivo</div><div class="modal-field-value">${esc(il.objetivo||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Alcance</div><div class="modal-field-value">${esc(il.alcance||'—')}</div></div>
+      </div>
+    </div>
+    ${acts?`<div class="modal-section"><div class="modal-section-title">Actividades clave</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">${acts}</div></div>`:''}
+    <div class="modal-section"><div class="modal-section-title">Inversión y beneficios</div>
+      <div class="modal-grid-2">
+        <div class="modal-field"><div class="modal-field-label">Inversión estimada</div><div class="modal-field-value" style="font-family:var(--ff-display);font-size:26px;color:var(--ink)">${esc(il.inversion||'N/D')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Beneficios esperados</div>${bens||'<div style="font-size:13px;color:var(--muted)">No especificados</div>'}</div>
+      </div>
+    </div>
+    ${pils?`<div class="modal-section"><div class="modal-section-title">Alineación estratégica</div><div style="display:flex;flex-wrap:wrap;gap:6px">${pils}</div></div>`:''}
+    ${docsHtml}
+    <div class="modal-section"><div class="modal-section-title">Registro</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        ${il.folio?`<div class="modal-field"><div class="modal-field-label">Folio</div><div class="modal-field-value" style="font-family:var(--ff-display);font-size:22px;color:var(--b600);letter-spacing:.06em">${esc(il.folio)}</div></div>`:''}
+        <div class="modal-field"><div class="modal-field-label">Product Owner</div><div class="modal-field-value">${esc(il.firma_po||il.po||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Fecha</div><div class="modal-field-value">${esc(il.fecha||'—')}</div></div>
+        <div class="modal-field"><div class="modal-field-label">Registrado</div><div class="modal-field-value" style="font-size:12px">${esc(il.registrado||'—')}</div></div>
+      </div>
+    </div>`;
+  document.getElementById('modal-overlay').classList.remove('hidden');
+};
+
+window.closeModal = function(e){
+  if(e&&e.target!==document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.add('hidden');
+  modalId=null;
+};
+
+window.deleteFromModal = async function(){
+  if(!modalId||!confirm('¿Eliminar esta iniciativa? Esta acción no se puede deshacer.')) return;
+  const btn=document.getElementById('btn-delete');
+  btn.disabled=true; btn.textContent='Eliminando...';
+  try {
+    await deleteDoc(doc(db,'shark_ils_2026',modalId));
+    window.closeModal();
+    showToast('🗑  Iniciativa eliminada');
+  } catch(err){
+    showToast('❌  Error al eliminar: '+err.message,'#B91C1C');
+  } finally {
+    btn.disabled=false; btn.textContent='🗑 Eliminar';
+  }
+};
+
+/* ── Helpers ── */
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+window.esc=esc;
+
+function showToast(msg,bg='var(--success)'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.background=bg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3400);
+}
+window.showToast=showToast;
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') window.closeModal() });
+
+/* ── Boot ── */
+boot();
+</script>
+</body>
+</html>
