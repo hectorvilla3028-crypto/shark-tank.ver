@@ -440,6 +440,32 @@ textarea{resize:vertical}
 /* List table eval columns */
 .list-eval-score{ font-family:var(--ff-display);font-size:15px;color:var(--accent) }
 
+
+/* ══ AUTOSAVE DRAFT BANNER ═══════════════════════ */
+#draft-banner{
+  display:none;
+  background:var(--b50);border:1.5px solid var(--b200);border-radius:8px;
+  padding:12px 18px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;
+}
+.draft-left{display:flex;align-items:center;gap:10px}
+.draft-dot{width:8px;height:8px;border-radius:50%;background:var(--b500);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
+.draft-text{font-size:12px;color:var(--b700);font-weight:600}
+.draft-time{font-family:var(--ff-mono);font-size:10px;color:var(--muted)}
+.draft-actions{display:flex;gap:8px}
+.draft-btn{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;border:1.5px solid var(--b300);color:var(--b700);background:var(--white);cursor:pointer;transition:all .15s}
+.draft-btn:hover{background:var(--b600);color:var(--white);border-color:var(--b600)}
+.draft-btn.discard{border-color:var(--line);color:var(--muted)}
+.draft-btn.discard:hover{background:var(--danger);color:var(--white);border-color:var(--danger)}
+/* Autosave indicator in topbar */
+.autosave-indicator{
+  font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,.3);
+  display:flex;align-items:center;gap:4px;transition:color .3s;
+}
+.autosave-indicator.saving{color:var(--b300)}
+.autosave-indicator.saved{color:#86EFAC}
+
 /* ══ TOAST ══════════════════════════════════════ */
 #toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--success);color:var(--white);padding:14px 28px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
@@ -528,6 +554,7 @@ textarea{resize:vertical}
   </div>
   <div class="topbar-right">
     <div class="topbar-live"><div class="live-dot"></div>EN VIVO</div>
+    <div class="autosave-indicator hidden" id="autosave-indicator"><span id="autosave-text">Guardando...</span></div>
     <span class="topbar-user" id="topbar-user"></span>
     <button class="btn-logout" onclick="logout()">Salir</button>
   </div>
@@ -545,6 +572,21 @@ textarea{resize:vertical}
       <div class="form-hero-right">IL</div>
     </div>
     <div class="accent-line"></div>
+    <!-- Autosave draft banner -->
+    <div id="draft-banner" style="display:none">
+      <div class="draft-left">
+        <div class="draft-dot"></div>
+        <div>
+          <div class="draft-text">📝 Tienes un borrador guardado</div>
+          <div class="draft-time" id="draft-time">Guardado automáticamente</div>
+        </div>
+      </div>
+      <div class="draft-actions">
+        <button type="button" class="draft-btn" onclick="restoreDraft()">Restaurar borrador</button>
+        <button type="button" class="draft-btn discard" onclick="discardDraft()">Descartar</button>
+      </div>
+    </div>
+
     <form id="il-form" onsubmit="submitForm(event)" novalidate>
       <div class="field-group">
         <div class="section-label">Nombre de la iniciativa</div>
@@ -929,6 +971,7 @@ textarea{resize:vertical}
     </div>
     <div class="eval-footer">
       <button class="btn-sm" onclick="closeEval()">Cancelar</button>
+      <button class="btn-sm" id="eval-repdf-btn" style="display:none;border-color:var(--b300);color:var(--b700);font-weight:700;align-items:center;gap:6px" onclick="exportEvalPDF()">📄 Ver PDF guardado</button>
       <button class="btn-sm" style="border-color:var(--b400);color:var(--b600);font-weight:700" onclick="saveEval()">💾 Guardar evaluación</button>
       <button class="btn-eval-pdf" onclick="exportEvalPDF()">📄 Exportar PDF</button>
     </div>
@@ -946,6 +989,7 @@ textarea{resize:vertical}
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer">
       <button class="btn-sm danger" id="btn-delete" onclick="deleteFromModal()">🗑 Eliminar</button>
+      <button class="btn-sm" id="btn-modal-pdf" style="display:none;border-color:var(--b300);color:var(--b700);font-weight:700" onclick="exportModalPDF()">📄 Exportar PDF</button>
       <button class="btn-sm" style="border-color:var(--b400);color:var(--b600)" onclick="window.openEval(window._currentModalId)">📋 Evaluar iniciativa</button>
       <button class="btn-sm" onclick="closeModal()">Cerrar</button>
     </div>
@@ -1050,9 +1094,13 @@ window.login = function(role){
     role==='po'
       ? '<strong>Product Owner</strong> · Registro de Iniciativas'
       : '<strong>Administrador CD</strong> · Panel de Control';
+  // Show autosave indicator only for PO
+  const aiEl = document.getElementById('autosave-indicator');
+  if(aiEl){ if(role==='po') aiEl.classList.remove('hidden'); else aiEl.classList.add('hidden'); }
   if(role==='po'){
     document.getElementById('screen-po').style.display='block';
     document.getElementById('fecha-input').value = new Date().toISOString().split('T')[0];
+    setTimeout(initAutosave, 100); // init after DOM renders
   } else {
     document.getElementById('screen-admin').style.display='block';
     startListener();
@@ -1260,6 +1308,7 @@ window.submitForm = async function(e){
     document.getElementById('screen-po').style.display='none';
     document.getElementById('topbar').classList.add('hidden');
     document.getElementById('success-folio').textContent = folio;
+    clearDraft();
     document.getElementById('screen-success').style.display='flex';
     window.scrollTo({top:0,behavior:'smooth'});
   } catch(err){
@@ -1349,6 +1398,9 @@ window.openModal = function(id){
   const il=ilsCache.find(i=>i.id===id); if(!il) return;
   modalId=id;
   window._currentModalId=id;
+  // Show PDF export button only if evaluation exists
+  const pdfBtn = document.getElementById('btn-modal-pdf');
+  if(pdfBtn) pdfBtn.style.display = il.evaluacion ? 'inline-flex' : 'none';
   document.getElementById('modal-title').textContent=il.nombre;
   document.getElementById('modal-sub').textContent=`${il.folio?il.folio+' · ':''}${il.po} · ${il.zona}${il.kpi_tipo?' · '+il.kpi_tipo:''}`;
   const pils=(il.pilares||[]).map(p=>`<span class="pilar-tag">${esc(p)}</span>`).join(' ');
@@ -1607,6 +1659,9 @@ window.openEval = function(id){
   // Set header
   document.getElementById('eval-title').textContent = il.folio ? il.folio+' · Evaluación' : 'Evaluación de iniciativa';
   document.getElementById('eval-sub').textContent = il.nombre+' · '+il.po+' · '+il.zona;
+  // Show/hide re-export PDF btn if eval already exists
+  const rePdfBtn = document.getElementById('eval-repdf-btn');
+  if(rePdfBtn) rePdfBtn.style.display = (il.evaluacion ? 'flex' : 'none');
   // Reset scores to 5
   for(let i=0;i<5;i++){
     document.getElementById('sc'+i).value=5;
@@ -1790,12 +1845,200 @@ window.saveEval = async function(){
     await updateDoc(fbDoc(db,'shark_ils_2026', evalId), { evaluacion: evalData });
     showToast('✅ Evaluación guardada correctamente');
     document.getElementById('eval-overlay').classList.add('hidden');
+    // Show PDF button in modal immediately after saving
+    const pdfBtnM = document.getElementById('btn-modal-pdf');
+    if(pdfBtnM) pdfBtnM.style.display = 'inline-flex';
     evalId=null;
   } catch(err){
     showToast('❌ Error al guardar: '+err.message,'#B91C1C');
   } finally {
     if(btn){ btn.disabled=false; btn.innerHTML='💾 Guardar evaluación'; }
   }
+};
+
+/* ══════════════════════════════════════════════
+   AUTOSAVE — PO FORM DRAFT
+═══════════════════════════════════════════════ */
+const DRAFT_KEY = 'st_po_draft_v1';
+let autosaveTimer = null;
+
+// All text/select/textarea field names in the form
+const DRAFT_FIELDS = [
+  'nombre','po','zona','duracion','complejidad',
+  'problema','impacto','solucion','objetivo','alcance','riesgos',
+  'kpi_principal','kpi_tiendas','kpi_plazo',
+  'inv_situacion','inv_resultado','inv_impacto',
+  'inversion','ben1','ben2','ben3','firma_po','fecha'
+];
+
+function getDraftData(){
+  const form = document.getElementById('il-form');
+  if(!form) return null;
+  const data = {};
+  DRAFT_FIELDS.forEach(name => {
+    const el = form.querySelector(`[name="${name}"]`);
+    if(el) data[name] = el.value || '';
+  });
+  // Multi-select areas
+  const areasSel = document.getElementById('areas-select');
+  if(areasSel) data._areas = [...areasSel.selectedOptions].map(o=>o.value);
+  // KPI chip
+  data._kpi_tipo = selectedKpi || '';
+  data._savedAt = new Date().toLocaleString('es-MX');
+  return data;
+}
+
+function saveDraft(){
+  const data = getDraftData();
+  if(!data) return;
+  // Only save if at least one field has content
+  const hasContent = DRAFT_FIELDS.some(f => data[f] && data[f].trim());
+  if(!hasContent) return;
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    showAutosaveIndicator('saved');
+  } catch(e){ /* storage full */ }
+}
+
+function loadDraft(){
+  try { return JSON.parse(localStorage.getItem(DRAFT_KEY)||'null'); }
+  catch { return null; }
+}
+
+function clearDraft(){
+  localStorage.removeItem(DRAFT_KEY);
+  document.getElementById('draft-banner').style.display = 'none';
+}
+
+function showAutosaveIndicator(state){
+  const el = document.getElementById('autosave-indicator');
+  const txt = document.getElementById('autosave-text');
+  if(!el) return;
+  el.classList.remove('hidden','saving','saved');
+  if(state === 'saving'){
+    el.classList.add('saving'); txt.textContent = '💾 Guardando...';
+  } else {
+    el.classList.add('saved'); txt.textContent = '✓ Borrador guardado';
+    setTimeout(()=>{ el.classList.remove('saved'); el.classList.add('hidden'); }, 2500);
+  }
+}
+
+function scheduleAutosave(){
+  clearTimeout(autosaveTimer);
+  showAutosaveIndicator('saving');
+  autosaveTimer = setTimeout(saveDraft, 1200);
+}
+
+function initAutosave(){
+  const form = document.getElementById('il-form');
+  if(!form) return;
+  // Attach listeners to all form inputs
+  form.querySelectorAll('input,textarea,select').forEach(el => {
+    el.addEventListener('input', scheduleAutosave);
+    el.addEventListener('change', scheduleAutosave);
+  });
+  // Also save on page visibility change (tab switch, close)
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.hidden) saveDraft();
+  });
+  window.addEventListener('beforeunload', ()=> saveDraft());
+  // Check for existing draft
+  const draft = loadDraft();
+  if(draft && Object.values(draft).some(v => typeof v === 'string' && v.trim())){
+    const banner = document.getElementById('draft-banner');
+    banner.style.display = 'flex';
+    document.getElementById('draft-time').textContent =
+      `Guardado el ${draft._savedAt || 'antes de cerrar'}`;
+  }
+}
+
+window.restoreDraft = function(){
+  const draft = loadDraft(); if(!draft) return;
+  const form = document.getElementById('il-form'); if(!form) return;
+  DRAFT_FIELDS.forEach(name => {
+    const el = form.querySelector(`[name="${name}"]`);
+    if(el && draft[name] !== undefined) el.value = draft[name];
+  });
+  // Restore areas multi-select
+  if(draft._areas && draft._areas.length){
+    const areasSel = document.getElementById('areas-select');
+    if(areasSel) [...areasSel.options].forEach(o => {
+      o.selected = draft._areas.includes(o.value);
+    });
+  }
+  // Restore KPI chip
+  if(draft._kpi_tipo){
+    selectedKpi = draft._kpi_tipo;
+    document.querySelectorAll('.kpi-chip').forEach(btn => {
+      btn.classList.toggle('on', btn.dataset.kpi === selectedKpi);
+    });
+    document.getElementById('kpi-sub-label').textContent = selectedKpi;
+  }
+  document.getElementById('draft-banner').style.display = 'none';
+  showToast('✅ Borrador restaurado');
+};
+
+window.discardDraft = function(){
+  clearDraft();
+  showToast('🗑 Borrador descartado');
+};
+
+/* ══════════════════════════════════════════════
+   EVAL PERSISTENCE — store/load from Firestore
+═══════════════════════════════════════════════ */
+
+// Load saved evaluation into the eval panel when opening
+const _origOpenEval = window.openEval;
+window.openEval = function(id){
+  _origOpenEval(id);
+  // Populate with saved evaluation if exists
+  const il = ilsCache.find(i=>i.id===id);
+  if(!il || !il.evaluacion) return;
+  const ev = il.evaluacion;
+  const labels=['Impacto venta/tráfico','Claridad objetivo','Viabilidad plan','Escalabilidad','Alineación nacional'];
+  labels.forEach((lbl,i)=>{
+    const saved = ev.scores?.[lbl];
+    if(saved !== undefined){
+      document.getElementById('sc'+i).value = saved;
+      document.getElementById('sn'+i).textContent = saved;
+    }
+  });
+  recalcTotal();
+  if(ev.decision) setDecision(ev.decision);
+  if(ev.comentarios) document.getElementById('eval-comentarios').value = ev.comentarios;
+  if(ev.fortalezas)  document.getElementById('eval-fortalezas').value  = ev.fortalezas;
+  if(ev.oportunidades) document.getElementById('eval-oportunidades').value = ev.oportunidades;
+};
+
+/* ── Export PDF from modal (uses saved eval data) ── */
+window.exportModalPDF = function(){
+  if(!window._currentModalId){ showToast('⚠️ Sin iniciativa seleccionada','#B91C1C'); return; }
+  // Temporarily set evalId and use existing exportEvalPDF
+  const prevEvalId = evalId;
+  evalId = window._currentModalId;
+  const il = ilsCache.find(i=>i.id===evalId);
+  if(!il || !il.evaluacion){ showToast('⚠️ Esta iniciativa aún no tiene evaluación guardada','#B91C1C'); evalId=prevEvalId; return; }
+  // Pre-populate eval panel fields with saved data (silently)
+  const ev = il.evaluacion;
+  const labels=['Impacto venta/tráfico','Claridad objetivo','Viabilidad plan','Escalabilidad','Alineación nacional'];
+  labels.forEach((lbl,i)=>{
+    const saved = ev.scores?.[lbl];
+    if(saved !== undefined){
+      const el = document.getElementById('sc'+i);
+      if(el) el.value = saved;
+    }
+  });
+  recalcTotal();
+  if(ev.decision) setDecision(ev.decision);
+  const ec = document.getElementById('eval-comentarios');
+  const ef = document.getElementById('eval-fortalezas');
+  const eo = document.getElementById('eval-oportunidades');
+  if(ec) ec.value = ev.comentarios||'';
+  if(ef) ef.value = ev.fortalezas||'';
+  if(eo) eo.value = ev.oportunidades||'';
+  // Generate PDF
+  exportEvalPDF();
+  evalId = prevEvalId;
 };
 
 /* ── Helpers ── */
